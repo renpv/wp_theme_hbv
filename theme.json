@@ -1,0 +1,61 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": false,
+		"layout": { "contentSize": "42.5rem", "wideSize": "72rem" },
+		"color": {
+			"custom": false,
+			"customGradient": true,
+			"defaultPalette": false,
+			"defaultGradients": false,
+			"palette": [
+				{ "slug": "terra", "name": "Terra", "color": "#8f4a2e" },
+				{ "slug": "couro", "name": "Couro", "color": "#2b1f18" },
+				{ "slug": "areia", "name": "Areia", "color": "#f5efe2" },
+				{ "slug": "papel", "name": "Papel", "color": "#fbf8f1" },
+				{ "slug": "acude", "name": "Açude", "color": "#17566e" },
+				{ "slug": "caatinga", "name": "Caatinga", "color": "#47612c" },
+				{ "slug": "ocre", "name": "Ocre", "color": "#b97a1c" },
+				{ "slug": "pedra", "name": "Pedra", "color": "#6a6057" }
+			]
+		},
+		"typography": {
+			"customFontSize": false,
+			"fluid": false,
+			"fontFamilies": [
+				{
+					"slug": "display",
+					"name": "Serifada (títulos e citações)",
+					"fontFamily": "\"Iowan Old Style\", \"Palatino Linotype\", Palatino, \"Book Antiqua\", Georgia, serif"
+				},
+				{
+					"slug": "body",
+					"name": "Sistema (texto)",
+					"fontFamily": "system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+				}
+			],
+			"fontSizes": [
+				{ "slug": "pequeno", "name": "Pequeno", "size": "0.9375rem" },
+				{ "slug": "normal", "name": "Normal", "size": "1.0625rem" },
+				{ "slug": "destaque", "name": "Destaque", "size": "1.25rem" },
+				{ "slug": "grande", "name": "Grande", "size": "1.875rem" }
+			]
+		},
+		"spacing": {
+			"units": [ "rem", "%" ],
+			"spacingSizes": [
+				{ "slug": "20", "name": "Pequeno", "size": "0.5rem" },
+				{ "slug": "30", "name": "Médio", "size": "1rem" },
+				{ "slug": "40", "name": "Grande", "size": "2rem" },
+				{ "slug": "50", "name": "Extra", "size": "3rem" }
+			]
+		}
+	},
+	"styles": {
+		"color": { "background": "var(--hbv-surface)", "text": "var(--hbv-text)" },
+		"elements": {
+			"link": { "color": { "text": "var(--hbv-link)" } }
+		}
+	}
+}

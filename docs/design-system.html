@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design system: História de Boa Viagem — Memória</title>
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../style.css">
+<style>
+	.ds-wrap { max-width: 64rem; margin: 0 auto; padding: 2rem var(--hbv-gutter) 5rem; }
+	.ds-wrap > section { padding-block: var(--hbv-space-6); border-top: 1px solid var(--hbv-border); }
+	.ds-wrap > section:first-of-type { border-top: 0; }
+	.ds-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: var(--hbv-space-4); list-style: none; margin: 0; padding: 0; }
+	.ds-swatch { border: 1px solid var(--hbv-border); border-radius: var(--hbv-radius-sm); overflow: hidden; background: var(--hbv-surface); font-size: var(--hbv-fs-xs); }
+	.ds-swatch i { display: block; height: 3.5rem; }
+	.ds-swatch b, .ds-swatch span { display: block; padding: 0 var(--hbv-space-3); }
+	.ds-swatch b { padding-top: var(--hbv-space-2); font-size: var(--hbv-fs-sm); }
+	.ds-swatch span { padding-bottom: var(--hbv-space-2); color: var(--hbv-text-muted); font-variant-numeric: tabular-nums; }
+	.ds-row { display: flex; flex-wrap: wrap; gap: var(--hbv-space-4); align-items: center; }
+	.ds-demo { padding: var(--hbv-space-5); background: var(--hbv-surface); border: 1px solid var(--hbv-border); border-radius: var(--hbv-radius-md); }
+	.ds-demo--dark { background: var(--hbv-chrome-bg); color: var(--hbv-chrome-text); border-color: var(--hbv-chrome-bg); }
+	.ds-type { display: grid; gap: var(--hbv-space-3); }
+	.ds-type > div { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: var(--hbv-space-4); align-items: baseline; }
+	.ds-type small { color: var(--hbv-text-muted); font-size: var(--hbv-fs-xs); }
+	.ds-space { display: flex; align-items: flex-end; gap: var(--hbv-space-4); flex-wrap: wrap; }
+	.ds-space div { text-align: center; font-size: var(--hbv-fs-xs); color: var(--hbv-text-muted); }
+	.ds-space i { display: block; background: var(--hbv-accent); margin: 0 auto var(--hbv-space-1); }
+	.ds-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: var(--hbv-fs-xs); background: var(--hbv-surface-alt); padding: 0.1rem 0.4rem; border-radius: var(--hbv-radius-sm); }
+	.ds-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: var(--hbv-space-5); }
+</style>
+</head>
+<body>
+<div class="ds-wrap">
+
+	<header class="hbv-page-head hbv-page-head--wide">
+		<p class="hbv-eyebrow">Design system, versão 1.0</p>
+		<h1>História de Boa Viagem — Memória</h1>
+		<p class="hbv-page-head__desc">Tokens e componentes do tema WordPress do acervo histórico do Município. Esta página usa os mesmos arquivos de estilo do tema.</p>
+	</header>
+
+	<section aria-labelledby="cores">
+		<h2 id="cores">Cor</h2>
+		<p>Paleta base com nomes do território; os componentes só usam os tokens semânticos.</p>
+		<ul class="ds-swatches">
+			<li class="ds-swatch"><i style="background:var(--hbv-terra-600)"></i><b>Terra 600</b><span>#8F4A2E · marca</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-terra-700)"></i><b>Terra 700</b><span>#7A3E26 · hover</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-couro-900)"></i><b>Couro 900</b><span>#2B1F18 · texto, menu</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-couro-700)"></i><b>Couro 700</b><span>#4D3A2D · submenu</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-areia-100)"></i><b>Areia 100</b><span>#F5EFE2 · fundo</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-areia-50)"></i><b>Areia 50</b><span>#FBF8F1 · superfície</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-areia-200)"></i><b>Areia 200</b><span>#EADFCB · fichas</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-areia-300)"></i><b>Areia 300</b><span>#D9CAAE · bordas</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-acude-700)"></i><b>Açude 700</b><span>#17566E · links</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-acude-100)"></i><b>Açude 100</b><span>#DCEAF1 · informação</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-caatinga-700)"></i><b>Caatinga 700</b><span>#47612C · sucesso</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-ocre-600)"></i><b>Ocre 600</b><span>#B97A1C · foco</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-ocre-400)"></i><b>Ocre 400</b><span>#D9A441 · sobre escuro</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-ocre-100)"></i><b>Ocre 100</b><span>#F7E8C6 · citações</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-pedra-600)"></i><b>Pedra 600</b><span>#6A6057 · texto secundário</span></li>
+			<li class="ds-swatch"><i style="background:var(--hbv-alerta-700)"></i><b>Alerta 700</b><span>#9B2C1C · erro</span></li>
+		</ul>
+	</section>
+
+	<section aria-labelledby="tipografia">
+		<h2 id="tipografia">Tipografia</h2>
+		<div class="ds-type">
+			<div><small>h1 · 30–40 px</small><span style="font-family:var(--hbv-font-display);font-size:var(--hbv-fs-3xl);font-weight:700;line-height:1.2">A história da cidade de Boa Viagem</span></div>
+			<div><small>h2 · 30 px</small><span style="font-family:var(--hbv-font-display);font-size:var(--hbv-fs-2xl);font-weight:700;line-height:1.2">1º Momento: de uma fazenda à vila</span></div>
+			<div><small>h3 · 24 px</small><span style="font-family:var(--hbv-font-display);font-size:var(--hbv-fs-xl);font-weight:700">Da Lagoa do Cavalo Morto à capela</span></div>
+			<div><small>Lead · 20 px</small><span style="font-size:var(--hbv-fs-lg)">A história do Município de Boa Viagem em fatos e fotos.</span></div>
+			<div><small>Texto · 17 px</small><span>Em 1863 a vila já possuía oitenta casas e, graças ao bom desempenho de sua produção agrícola, ganhou um significativo aumento de população.</span></div>
+			<div><small>Meta · 15 px</small><span style="font-size:var(--hbv-fs-sm);color:var(--hbv-text-muted)">Publicado em 18 de junho de 2021 · Por Eliel Rafael da Silva Júnior</span></div>
+			<div><small>Rótulo · 13 px</small><span class="hbv-eyebrow">Sertão Central do Ceará</span></div>
+		</div>
+	</section>
+
+	<section aria-labelledby="espaco">
+		<h2 id="espaco">Espaçamento</h2>
+		<div class="ds-space">
+			<div><i style="width:4px;height:4px"></i>1 · 4</div>
+			<div><i style="width:8px;height:8px"></i>2 · 8</div>
+			<div><i style="width:12px;height:12px"></i>3 · 12</div>
+			<div><i style="width:16px;height:16px"></i>4 · 16</div>
+			<div><i style="width:24px;height:24px"></i>5 · 24</div>
+			<div><i style="width:32px;height:32px"></i>6 · 32</div>
+			<div><i style="width:48px;height:48px"></i>7 · 48</div>
+			<div><i style="width:64px;height:64px"></i>8 · 64</div>
+		</div>
+	</section>
+
+	<section aria-labelledby="acoes">
+		<h2 id="acoes">Botões, campos e selos</h2>
+		<div class="ds-demo">
+			<div class="ds-row" style="margin-bottom:var(--hbv-space-5)">
+				<a class="hbv-btn" href="#acoes">Buscar</a>
+				<a class="hbv-btn hbv-btn--ghost" href="#acoes">Ver a linha do tempo</a>
+			</div>
+			<form class="hbv-search" action="#" onsubmit="return false" style="margin-bottom:var(--hbv-space-5)">
+				<label class="screen-reader-text" for="ds-busca">Pesquisar no acervo</label>
+				<input type="search" id="ds-busca" placeholder="Pesquisar no acervo">
+				<button type="submit" class="hbv-btn">Buscar</button>
+			</form>
+			<ul class="hbv-badges" style="margin:0">
+				<li><a class="hbv-badge hbv-badge--tema" href="#acoes">Cultura</a></li>
+				<li><a class="hbv-badge hbv-badge--periodo" href="#acoes">1º Momento</a></li>
+				<li><span class="hbv-badge">Biografia</span></li>
+			</ul>
+		</div>
+		<div class="ds-grid-2" style="margin-top:var(--hbv-space-5)">
+			<p class="hbv-alert">A informação aparece em azul claro, com texto de apoio.</p>
+			<p class="hbv-alert hbv-alert--success">Comentário enviado. Obrigado pela contribuição.</p>
+			<p class="hbv-alert hbv-alert--danger">Não foi possível enviar. Confira o e-mail informado.</p>
+		</div>
+	</section>
+
+	<section aria-labelledby="navegacao">
+		<h2 id="navegacao">Menu, trilha e abas</h2>
+		<div class="hbv-navbar" style="margin-bottom:var(--hbv-space-5)">
+			<div style="padding-inline:var(--hbv-space-3)">
+				<ul class="hbv-menu" style="display:flex;flex-wrap:wrap">
+					<li><a href="#navegacao">Editorial</a></li>
+					<li><a href="#navegacao">A História do Município</a></li>
+					<li class="current-menu-item"><a href="#navegacao">A Cidade</a></li>
+					<li><a href="#navegacao">A Cultura</a></li>
+					<li><a href="#navegacao">A Educação</a></li>
+					<li><a href="#navegacao">A História Política</a></li>
+					<li><a href="#navegacao">A Saúde</a></li>
+					<li><a href="#navegacao">O Turismo</a></li>
+				</ul>
+			</div>
+		</div>
+		<nav class="hbv-breadcrumbs" aria-label="Você está em"><ol><li><a href="#navegacao">Início</a></li><li><a href="#navegacao">Biografias</a></li><li aria-current="page">Antônio de Almeida Lustosa</li></ol></nav>
+		<ul class="hbv-tabs">
+			<li><a href="#navegacao">Ano todo</a></li><li><a href="#navegacao">Jan</a></li><li><a href="#navegacao">Fev</a></li><li><a href="#navegacao" aria-current="true">Nov</a></li><li><a href="#navegacao">Dez</a></li>
+		</ul>
+		<ul class="hbv-az">
+			<li><a href="#navegacao">A</a></li><li><a href="#navegacao">B</a></li><li><span>C</span></li><li><a href="#navegacao">D</a></li><li><span>E</span></li><li><a href="#navegacao">F</a></li>
+		</ul>
+	</section>
+
+	<section aria-labelledby="cartoes">
+		<h2 id="cartoes">Cartões</h2>
+		<ul class="hbv-grid">
+			<li>
+				<article class="hbv-card">
+					<div class="hbv-card__body">
+						<p class="hbv-card__kicker">Artigo · Economia</p>
+						<h3 class="hbv-card__title"><a href="#cartoes">Os recursos hídricos do Município</a></h3>
+						<p class="hbv-card__excerpt">Rio Boa Viagem, açudes e o abastecimento da cidade ao longo dos séculos.</p>
+						<p class="hbv-card__meta">18 de junho de 2021</p>
+					</div>
+				</article>
+			</li>
+			<li>
+				<article class="hbv-card hbv-card--pessoa">
+					<div class="hbv-card__body">
+						<p class="hbv-card__kicker">Biografia · Cultura</p>
+						<h3 class="hbv-card__title"><a href="#cartoes">Maria Auzerina Paiva Chaves</a></h3>
+						<p class="hbv-card__meta">Professora</p>
+					</div>
+				</article>
+			</li>
+			<li>
+				<article class="hbv-card hbv-card--secao">
+					<div class="hbv-card__body">
+						<h3 class="hbv-card__title"><a href="#cartoes">A Saúde</a></h3>
+						<p class="hbv-card__excerpt">Rede pública e privada, da atenção primária ao pronto atendimento.</p>
+					</div>
+				</article>
+			</li>
+		</ul>
+	</section>
+
+	<section aria-labelledby="texto">
+		<h2 id="texto">Texto histórico</h2>
+		<dl class="hbv-ficha">
+			<div><dt>Nascimento</dt><dd>14 de janeiro de 1771</dd></div>
+			<div><dt>Local</dt><dd>Fazenda Cavalo Morto</dd></div>
+			<div><dt>Ocupação</dt><dd>Capitão e fazendeiro</dd></div>
+		</dl>
+		<div class="hbv-prose">
+			<h2 class="hbv-basicas">As informações básicas</h2>
+			<p>Segundo a classificação do IBGE, Boa Viagem é uma cidade de porte pequeno, pois abriga menos de 50 mil habitantes.</p>
+
+			<div class="hbv-momento">
+				<p class="hbv-momento__periodo">1743 a 1864</p>
+				<h2>1º Momento: de uma fazenda à vila</h2>
+				<p>Acredita-se que as primeiras habitações surgiram na primeira metade do século XVIII, em torno de uma fazenda de criação de gado.</p>
+			</div>
+
+			<blockquote class="is-style-hbv-fonte">
+				<p>A Lagoa do Cavalo Morto deu origem à cidade de Boa Viagem, no Ceará, fundada sob as bênçãos de Nossa Senhora da Boa Viagem.</p>
+				<cite>Cavalcante Mota, 2000: p. 15</cite>
+			</blockquote>
+
+			<blockquote class="is-style-hbv-lei">
+				<p>Art. 15 – É proibido, dentro do perímetro urbano, edificar-se casas de palha ou taipa.</p>
+				<cite>Lei nº 2, de 30 de maio de 1937</cite>
+			</blockquote>
+
+			<figure class="is-style-hbv-historica">
+				<div style="aspect-ratio:16/9;background:linear-gradient(135deg,var(--hbv-areia-300),var(--hbv-terra-300));border-radius:var(--hbv-radius-sm)" role="img" aria-label="Espaço reservado para fotografia histórica"></div>
+				<figcaption>Imagem do Mercado Público Municipal por volta de 1960.</figcaption>
+			</figure>
+
+			<ul class="hbv-cronologia">
+				<li><strong>1771</strong> Casamento na Fazenda Cavalo Morto.</li>
+				<li><strong>1864</strong> Emancipação política do Município.</li>
+				<li><strong>1931</strong> Extinção do Município.</li>
+			</ul>
+
+			<div class="hbv-nota"><strong>Nota do editor.</strong> Se você tem fotografias ou documentos sobre este assunto, escreva pela página Fale conosco.</div>
+		</div>
+		<div class="hbv-fontes">
+			<h2>Fontes e bibliografia</h2>
+			<ol>
+				<li>FRANCO, Francisco; VIEIRA, Cavalcante. Boa Viagem, conhecer, amar e defender. Fortaleza: LCR, 2007.</li>
+				<li>NASCIMENTO, Raimundo. Memórias de minha terra. Fortaleza: Encaixe, 2002.</li>
+			</ol>
+		</div>
+	</section>
+
+	<section aria-labelledby="listas">
+		<h2 id="listas">Datas, linha do tempo e índices</h2>
+		<div class="ds-grid-2">
+			<ul class="hbv-fatos">
+				<li class="hbv-fato"><span class="hbv-dia" aria-hidden="true"><span class="hbv-dia__n">21</span><span class="hbv-dia__m">nov</span></span><div><h3 class="hbv-fato__title"><a href="#listas">Emancipação política do Município</a></h3><p class="hbv-fato__meta">21 de novembro de 1864 · Boa Viagem</p></div></li>
+				<li class="hbv-fato"><span class="hbv-dia" aria-hidden="true"><span class="hbv-dia__n">18</span><span class="hbv-dia__m">nov</span></span><div><h3 class="hbv-fato__title"><a href="#listas">Vila elevada a cidade</a></h3><p class="hbv-fato__meta">1938</p></div></li>
+			</ul>
+			<ol class="hbv-timeline">
+				<li class="hbv-timeline__item"><p class="hbv-timeline__range">1743 a 1864</p><h3 class="hbv-timeline__title"><a href="#listas">1º Momento</a></h3><p class="hbv-timeline__desc">Das primeiras habitações à emancipação.</p></li>
+				<li class="hbv-timeline__item"><p class="hbv-timeline__range">1864 a 1889</p><h3 class="hbv-timeline__title"><a href="#listas">2º Momento</a></h3><p class="hbv-timeline__desc">Primeiros anos do Município.</p></li>
+			</ol>
+		</div>
+		<h3 style="margin-top:var(--hbv-space-6)">Índice e lista numerada</h3>
+		<ul class="hbv-index">
+			<li><a href="#listas">Abel Alves de Morais</a><span class="hbv-index__meta">músico e rabequeiro</span></li>
+			<li><a href="#listas">Adelide de Carvalho</a><span class="hbv-index__meta">freira</span></li>
+			<li><a href="#listas">Aloísio Leo Arlindo Lorscheider</a><span class="hbv-index__meta">cardeal</span></li>
+		</ul>
+		<ol class="hbv-numlist" style="margin-top:var(--hbv-space-4)">
+			<li><a href="#listas">Avenida Abdon Francisco da Rocha</a></li>
+			<li><a href="#listas">Rua Adalcina Vieira de Freitas</a></li>
+			<li><a href="#listas">Travessa Basílio Vieira Carneiro</a></li>
+		</ol>
+	</section>
+
+	<section aria-labelledby="rodape">
+		<h2 id="rodape">Compartilhar e paginação</h2>
+		<ul class="hbv-share">
+			<li class="hbv-share__label">Compartilhar</li>
+			<li><a href="#rodape">WhatsApp</a></li><li><a href="#rodape">Facebook</a></li><li><a href="#rodape">E-mail</a></li><li><button type="button">Copiar link</button></li>
+		</ul>
+		<nav class="hbv-pagination"><div class="nav-links"><span class="page-numbers current">1</span><a class="page-numbers" href="#rodape">2</a><a class="page-numbers" href="#rodape">3</a><span class="page-numbers dots">…</span><a class="page-numbers" href="#rodape">Próximos →</a></div></nav>
+	</section>
+
+</div>
+</body>
+</html>

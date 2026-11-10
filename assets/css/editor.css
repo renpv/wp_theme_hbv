@@ -1,0 +1,70 @@
+/*
+ * Estilos do editor de blocos: o texto no editor tem a mesma aparência do site.
+ * Os tokens vêm de tokens.css (carregado antes, em add_editor_style).
+ */
+
+.editor-styles-wrapper {
+	background: var(--hbv-surface);
+	color: var(--hbv-text);
+	font-family: var(--hbv-font-body);
+	font-size: var(--hbv-fs-md);
+	line-height: var(--hbv-lh-prose);
+}
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4 {
+	font-family: var(--hbv-font-display);
+	line-height: var(--hbv-lh-tight);
+	color: var(--hbv-text);
+}
+
+.editor-styles-wrapper a { color: var(--hbv-link); }
+
+.editor-styles-wrapper .wp-block-quote {
+	position: relative;
+	padding: var(--hbv-space-4) var(--hbv-space-5) var(--hbv-space-4) var(--hbv-space-6);
+	background: var(--hbv-quote-bg);
+	border: 0;
+	border-radius: var(--hbv-radius-sm);
+	font-family: var(--hbv-font-display);
+}
+.editor-styles-wrapper .wp-block-quote cite {
+	display: block;
+	font-family: var(--hbv-font-body);
+	font-style: normal;
+	font-size: var(--hbv-fs-xs);
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--hbv-text-muted);
+}
+.editor-styles-wrapper .wp-block-quote.is-style-hbv-lei { background: var(--hbv-info-bg); font-family: var(--hbv-font-body); font-size: var(--hbv-fs-sm); }
+
+.editor-styles-wrapper figcaption,
+.editor-styles-wrapper .wp-element-caption { font-size: var(--hbv-fs-xs); color: var(--hbv-text-muted); }
+.editor-styles-wrapper .is-style-hbv-historica img { filter: sepia(0.18) contrast(1.02); border: 6px solid var(--hbv-surface); box-shadow: var(--hbv-shadow-1); }
+
+.editor-styles-wrapper .hbv-basicas {
+	font-family: var(--hbv-font-body);
+	font-size: var(--hbv-fs-xs);
+	letter-spacing: var(--hbv-tracking-label);
+	text-transform: uppercase;
+	color: var(--hbv-accent);
+}
+.editor-styles-wrapper .hbv-momento__periodo {
+	display: inline-block;
+	padding: 0.15rem 0.7rem;
+	background: var(--hbv-chrome-bg);
+	color: var(--hbv-chrome-accent);
+	font-size: var(--hbv-fs-xs);
+	font-weight: 700;
+	letter-spacing: var(--hbv-tracking-label);
+	text-transform: uppercase;
+	border-radius: var(--hbv-radius-sm);
+}
+.editor-styles-wrapper .is-style-hbv-nota { padding: var(--hbv-space-4) var(--hbv-space-5); background: var(--hbv-info-bg); border-radius: var(--hbv-radius-sm); font-size: var(--hbv-fs-sm); }
+.editor-styles-wrapper .hbv-cronologia { list-style: none; padding: 0; }
+.editor-styles-wrapper .hbv-cronologia li { padding-left: 5.5rem; position: relative; }
+.editor-styles-wrapper .hbv-cronologia li strong { position: absolute; left: 0; color: var(--hbv-accent); }

@@ -1,0 +1,181 @@
+/*
+ * História de Boa Viagem — Memória
+ * Design tokens (fonte única de verdade do design system).
+ * Camada 1: paleta base (cores nomeadas pelo território).
+ * Camada 2: tokens semânticos (o que os componentes usam).
+ * Camada 3: tipografia, espaçamento, forma, layout e movimento.
+ */
+
+:root {
+	/* ---------- 1. Paleta base ---------- */
+	/* Terra: barro e couro do Sertão Central (cor da marca) */
+	--hbv-terra-100: #f1ddd2;
+	--hbv-terra-300: #d49a7e;
+	--hbv-terra-500: #a85c3a;
+	--hbv-terra-600: #8f4a2e;
+	--hbv-terra-700: #7a3e26;
+
+	/* Couro: marrom escuro para texto e barras */
+	--hbv-couro-950: #1f1611;
+	--hbv-couro-900: #2b1f18;
+	--hbv-couro-700: #4d3a2d;
+
+	/* Areia: papel e chão de terra batida */
+	--hbv-areia-50: #fbf8f1;
+	--hbv-areia-100: #f5efe2;
+	--hbv-areia-200: #eadfcb;
+	--hbv-areia-300: #d9caae;
+
+	/* Açude: água, links e informação (herda o azul de links do site atual) */
+	--hbv-acude-100: #dceaf1;
+	--hbv-acude-300: #7fb8cf;
+	--hbv-acude-600: #1f6f8b;
+	--hbv-acude-700: #17566e;
+
+	/* Caatinga: verde de chuva, sucesso e natureza */
+	--hbv-caatinga-100: #e3ecd6;
+	--hbv-caatinga-600: #587a37;
+	--hbv-caatinga-700: #47612c;
+
+	/* Ocre: sol, destaque e foco */
+	--hbv-ocre-100: #f7e8c6;
+	--hbv-ocre-400: #d9a441;
+	--hbv-ocre-600: #b97a1c;
+
+	/* Pedra: cinzas quentes para texto secundário */
+	--hbv-pedra-500: #8a7f74;
+	--hbv-pedra-600: #6a6057;
+
+	/* Alerta (erros de formulário) */
+	--hbv-alerta-100: #f8dcd6;
+	--hbv-alerta-700: #9b2c1c;
+
+	/* ---------- 2. Tokens semânticos (tema claro) ---------- */
+	--hbv-bg: var(--hbv-areia-100);
+	--hbv-surface: var(--hbv-areia-50);
+	--hbv-surface-alt: var(--hbv-areia-200);
+	--hbv-text: var(--hbv-couro-900);
+	--hbv-text-muted: var(--hbv-pedra-600);
+	--hbv-border: var(--hbv-areia-300);
+	--hbv-link: var(--hbv-acude-700);
+	--hbv-link-hover: var(--hbv-terra-700);
+	--hbv-accent: var(--hbv-terra-600);
+	--hbv-accent-hover: var(--hbv-terra-700);
+	--hbv-on-accent: #ffffff;
+	--hbv-focus: var(--hbv-ocre-600);
+	--hbv-chrome-bg: var(--hbv-couro-900);
+	--hbv-chrome-bg-2: var(--hbv-couro-700);
+	--hbv-chrome-text: var(--hbv-areia-50);
+	--hbv-chrome-accent: var(--hbv-ocre-400);
+	--hbv-quote-bg: var(--hbv-ocre-100);
+	--hbv-quote-mark: var(--hbv-ocre-600);
+	--hbv-info-bg: var(--hbv-acude-100);
+	--hbv-success-bg: var(--hbv-caatinga-100);
+	--hbv-success-text: var(--hbv-caatinga-700);
+	--hbv-danger-bg: var(--hbv-alerta-100);
+	--hbv-danger-text: var(--hbv-alerta-700);
+
+	/* ---------- 3. Tipografia ---------- */
+	/* Pilhas de fontes do sistema: sem requisições externas (LGPD e desempenho).
+	   Para usar fontes próprias, declare @font-face no tema filho e troque estas variáveis. */
+	--hbv-font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+	--hbv-font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+	--hbv-fs-xs: 0.8125rem;   /* 13px: rótulos e legendas */
+	--hbv-fs-sm: 0.9375rem;   /* 15px: meta e widgets */
+	--hbv-fs-md: 1.0625rem;   /* 17px: texto corrido */
+	--hbv-fs-lg: 1.25rem;     /* 20px: lead e títulos de card */
+	--hbv-fs-xl: 1.5rem;      /* 24px: h3 */
+	--hbv-fs-2xl: 1.875rem;   /* 30px: h2 */
+	--hbv-fs-3xl: clamp(1.875rem, 4vw, 2.5rem);  /* h1 de página */
+	--hbv-fs-4xl: clamp(2.25rem, 6vw, 3.75rem);  /* título da home */
+
+	--hbv-lh-tight: 1.2;
+	--hbv-lh-snug: 1.4;
+	--hbv-lh-prose: 1.7;
+
+	--hbv-tracking-label: 0.08em;
+
+	/* ---------- 4. Espaçamento (base 4px) ---------- */
+	--hbv-space-1: 0.25rem;
+	--hbv-space-2: 0.5rem;
+	--hbv-space-3: 0.75rem;
+	--hbv-space-4: 1rem;
+	--hbv-space-5: 1.5rem;
+	--hbv-space-6: 2rem;
+	--hbv-space-7: 3rem;
+	--hbv-space-8: 4rem;
+	--hbv-space-9: 6rem;
+
+	/* ---------- 5. Forma e elevação ---------- */
+	--hbv-radius-sm: 3px;
+	--hbv-radius-md: 6px;
+	--hbv-radius-pill: 999px;
+	--hbv-border-w: 1px;
+	--hbv-shadow-1: 0 1px 2px rgba(43, 31, 24, 0.08);
+	--hbv-shadow-2: 0 8px 24px rgba(43, 31, 24, 0.12);
+
+	/* ---------- 6. Layout ---------- */
+	--hbv-container: 72rem;
+	--hbv-prose: 42.5rem;
+	--hbv-sidebar: 18.5rem;
+	--hbv-gutter: clamp(1rem, 4vw, 2rem);
+
+	/* ---------- 7. Movimento ---------- */
+	--hbv-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+	--hbv-dur-1: 120ms;
+	--hbv-dur-2: 220ms;
+}
+
+/* ---------- Tema escuro (segue o sistema; o atributo data-theme força uma escolha) ---------- */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--hbv-bg: var(--hbv-couro-950);
+		--hbv-surface: var(--hbv-couro-900);
+		--hbv-surface-alt: #3a2b21;
+		--hbv-text: var(--hbv-areia-100);
+		--hbv-text-muted: #c9bba6;
+		--hbv-border: #4d3a2d;
+		--hbv-link: #8cc4da;
+		--hbv-link-hover: #f0b895;
+		--hbv-accent: #d98560;
+		--hbv-accent-hover: #e39a78;
+		--hbv-on-accent: #1f1611;
+		--hbv-focus: var(--hbv-ocre-400);
+		--hbv-chrome-bg: #140e0a;
+		--hbv-chrome-bg-2: #2b1f18;
+		--hbv-quote-bg: #3a2b21;
+		--hbv-quote-mark: var(--hbv-ocre-400);
+		--hbv-info-bg: #1d3a47;
+		--hbv-success-bg: #2c3a1e;
+		--hbv-success-text: #b9d29a;
+		--hbv-danger-bg: #4a211a;
+		--hbv-danger-text: #f2b6aa;
+		color-scheme: dark;
+	}
+}
+
+:root[data-theme="dark"] {
+	--hbv-bg: var(--hbv-couro-950);
+	--hbv-surface: var(--hbv-couro-900);
+	--hbv-surface-alt: #3a2b21;
+	--hbv-text: var(--hbv-areia-100);
+	--hbv-text-muted: #c9bba6;
+	--hbv-border: #4d3a2d;
+	--hbv-link: #8cc4da;
+	--hbv-link-hover: #f0b895;
+	--hbv-accent: #d98560;
+	--hbv-accent-hover: #e39a78;
+	--hbv-on-accent: #1f1611;
+	--hbv-focus: var(--hbv-ocre-400);
+	--hbv-chrome-bg: #140e0a;
+	--hbv-chrome-bg-2: #2b1f18;
+	--hbv-quote-bg: #3a2b21;
+	--hbv-quote-mark: var(--hbv-ocre-400);
+	--hbv-info-bg: #1d3a47;
+	--hbv-success-bg: #2c3a1e;
+	--hbv-success-text: #b9d29a;
+	--hbv-danger-bg: #4a211a;
+	--hbv-danger-text: #f2b6aa;
+	color-scheme: dark;
+}
