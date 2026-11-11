@@ -35,6 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 		</div>
 		<?php get_search_form(); ?>
+		<?php hbv_theme_toggle(); ?>
 	</div>
 
 	<div class="hbv-navbar">

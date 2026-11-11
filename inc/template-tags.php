@@ -156,10 +156,39 @@ function hbv_share_links() {
 		<li class="hbv-share__label"><?php esc_html_e( 'Compartilhar', 'hbv' ); ?></li>
 		<li><a href="<?php echo esc_url( 'https://wa.me/?text=' . $t . '%20' . $u ); ?>" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
 		<li><a href="<?php echo esc_url( 'https://www.facebook.com/sharer/sharer.php?u=' . $u ); ?>" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+		<li><a href="<?php echo esc_url( 'https://x.com/intent/post?text=' . $t . '&url=' . $u ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Compartilhar no X', 'hbv' ); ?>">X</a></li>
 		<li><a href="<?php echo esc_url( 'mailto:?subject=' . $t . '&body=' . $u, array( 'mailto' ) ); ?>"><?php esc_html_e( 'E-mail', 'hbv' ); ?></a></li>
 		<li><button type="button" data-hbv-copy="<?php echo esc_attr( $url ); ?>"><?php esc_html_e( 'Copiar link', 'hbv' ); ?></button></li>
 	</ul>
 	<?php
+}
+
+/**
+ * Seletor de tema de cores: automático (segue o aparelho), claro e escuro.
+ *
+ * O grupo nasce oculto e o JavaScript o mostra, porque sem script o botão não faz nada.
+ * A escolha fica no navegador do visitante (localStorage) e vale só neste site.
+ *
+ * @param string $label_id Opcional: id de um elemento que já rotula o grupo (no lugar do aria-label).
+ */
+function hbv_theme_toggle( $label_id = '' ) {
+	$options = array(
+		'auto'  => array( __( 'Tema automático, segue o aparelho', 'hbv' ), 'contrast' ),
+		'light' => array( __( 'Tema claro', 'hbv' ), 'sun' ),
+		'dark'  => array( __( 'Tema escuro', 'hbv' ), 'moon' ),
+	);
+
+	$label_attr = $label_id
+		? 'aria-labelledby="' . esc_attr( $label_id ) . '"'
+		: 'aria-label="' . esc_attr__( 'Tema de cores', 'hbv' ) . '"';
+
+	echo '<div class="hbv-theme" role="group" ' . $label_attr . ' hidden>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- atributo escapado acima.
+	foreach ( $options as $key => $option ) {
+		echo '<button type="button" data-hbv-theme="' . esc_attr( $key ) . '" aria-pressed="false" aria-label="' . esc_attr( $option[0] ) . '" title="' . esc_attr( $option[0] ) . '">'
+			. hbv_icon( $option[1] ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG de lista fixa, escapado em hbv_icon().
+			. '</button>';
+	}
+	echo '</div>';
 }
 
 /**

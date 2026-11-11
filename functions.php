@@ -9,13 +9,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HBV_VERSION', '1.0.0' );
+define( 'HBV_VERSION', '1.1.0' );
 define( 'HBV_DIR', get_template_directory() );
 define( 'HBV_URI', get_template_directory_uri() );
 
 require_once HBV_DIR . '/inc/post-types.php';
 require_once HBV_DIR . '/inc/taxonomies.php';
 require_once HBV_DIR . '/inc/meta.php';
+require_once HBV_DIR . '/inc/icons.php';
 require_once HBV_DIR . '/inc/template-tags.php';
 require_once HBV_DIR . '/inc/patterns.php';
 require_once HBV_DIR . '/inc/starter.php';
@@ -137,6 +138,16 @@ function hbv_enqueue() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'hbv_enqueue' );
+
+/**
+ * Aplica o tema escolhido pelo visitante antes da primeira pintura (evita piscar de claro para escuro).
+ * Script próprio, curto e sem dependências. A escolha é guardada só no navegador (localStorage).
+ */
+function hbv_theme_init_script() {
+	$js = "(function(){try{var t=localStorage.getItem('hbv-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}}());";
+	wp_print_inline_script_tag( $js, array( 'id' => 'hbv-theme-init' ) );
+}
+add_action( 'wp_head', 'hbv_theme_init_script', 1 );
 
 /**
  * Remove o script de emoji (menos requisições).
@@ -298,6 +309,8 @@ function hbv_body_classes( $classes ) {
 	if ( is_singular( hbv_cpts() ) ) {
 		$classes[] = 'hbv-cpt-' . get_post_type();
 	}
+	// Reserva espaço no fim da página para a barra inferior do celular.
+	$classes[] = 'hbv-has-tabbar';
 	return $classes;
 }
 add_filter( 'body_class', 'hbv_body_classes' );

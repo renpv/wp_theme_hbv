@@ -62,6 +62,8 @@ $contact     = get_page_by_path( 'fale-conosco' );
 	</div>
 </footer>
 
+<?php get_template_part( 'template-parts/tabbar' ); ?>
+
 <button type="button" class="hbv-totop" hidden aria-label="<?php esc_attr_e( 'Voltar ao topo', 'hbv' ); ?>">&uarr;</button>
 
 <?php wp_footer(); ?>

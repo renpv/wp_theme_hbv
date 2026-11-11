@@ -32,7 +32,7 @@ Os campos estão registrados na API REST, então podem ser usados em importaçõ
 
 | Arquivo | Função |
 |---|---|
-| `front-page.php` | Home: hero com busca e números, seções, sete momentos, fatos do mês, biografias sorteadas, recentes e convite à colaboração |
+| `front-page.php` | Home: hero com busca, cards de números do acervo, seções com ícone, sete momentos, fatos do mês, biografias sorteadas, recentes e convite à colaboração |
 | `page-templates/page-secao.php` | Portal de seção: texto, subpáginas em cartões e conteúdos do mesmo tema |
 | `page-templates/page-linha-do-tempo.php` | Os sete períodos com os conteúdos mais recentes de cada um |
 | `single.php` | Artigo longo, com selos, ficha, fontes, compartilhar, anterior e próximo, comentários |
@@ -44,7 +44,9 @@ Os campos estão registrados na API REST, então podem ser usados em importaçõ
 | `archive-hbv.php` | Lugares, obras e instituições, com atalhos por tipo |
 | `archive.php` | Arquivos de tema, período, papel e demais taxonomias |
 | `search.php`, `404.php`, `index.php` | Busca em todo o acervo, página não encontrada e publicações |
-| `template-parts/card.php`, `fato.php` | Cartão (padrão, pessoa, seção) e item de data e fato |
+| `template-parts/card.php`, `fato.php` | Cartão (padrão, pessoa, seção, com ícone) e item de data e fato |
+| `template-parts/tabbar.php` | Barra inferior do celular e painel "Menu" (chamado em `footer.php`) |
+| `inc/icons.php` | Ícones SVG próprios e mapa de ícone por seção |
 
 ## 4. Editor de blocos
 
@@ -84,6 +86,13 @@ As entradas "Rede Pública" e "Rede Privada", que hoje apontam para a home, pass
 
 Cores, fontes e espaços: edite os tokens (`assets/css/tokens.css`) em um tema filho. Novo tipo de conteúdo: acrescente uma entrada em `hbv_post_type_defs()` (`inc/post-types.php`) e seus campos em `hbv_fields_for()` (`inc/meta.php`); `single-hbv.php` e `archive-hbv.php` passam a atendê-lo. Nova taxonomia: `hbv_taxonomy_defs()` em `inc/taxonomies.php`. Novo padrão de bloco: `inc/patterns.php`. Os tipos de conteúdo e campos pertencem ao tema. Ao trocar de tema, o conteúdo continua no banco de dados, mas os tipos deixam de aparecer no painel. Para evitar isso no longo prazo, mova `inc/post-types.php`, `inc/taxonomies.php` e `inc/meta.php` para um plugin de funcionalidades.
 
+### Tema, ícones e barra inferior
+
+- **Tema claro e escuro:** o seletor aparece no cabeçalho (computador) e no painel "Menu" (celular). Um script curto em `functions.php` (`hbv_theme_init_script`) aplica a escolha guardada antes da pintura. Sem JavaScript o site segue o tema do aparelho.
+- **Ícones:** todos em `inc/icons.php` (`hbv_icon_paths()`). Para um ícone novo, acrescente o caminho SVG (grade de 24 px, traço) e use `hbv_icon( 'nome' )`. O ícone de cada seção vem do endereço (slug) da página; o filtro `hbv_section_icons` ajusta ou acrescenta seções.
+- **Barra inferior:** itens definidos em `template-parts/tabbar.php`, ajustáveis pelo filtro `hbv_tabbar_items`. "Linha do tempo" (página `linha-do-tempo`) e "Mapa" (página com o endereço `mapa`) só aparecem se a página existir. As seções do painel vêm do menu principal (primeiro nível).
+- **Compartilhar no X:** link simples em `hbv_share_links()` (`x.com/intent/post`), sem script de terceiros.
+
 ## 8. Lista de verificação antes de publicar
 
-Contraste e foco por teclado em todas as páginas; menu por toque no celular; busca retornando todos os tipos; índice A–Z com 550 itens rápido (carrega em uma página); legendas e texto alternativo nas fotos; campo Fontes preenchido nos textos novos; imagens em largura máxima de 1600 px; cabeçalhos de segurança e HTTPS no servidor; teste de impressão de um artigo longo; política de privacidade e página Direitos Autorais publicadas.
+Contraste e foco por teclado em todas as páginas; menu por toque no celular (barra inferior e painel "Menu", com o botão de tema); busca retornando todos os tipos; índice A–Z com 550 itens rápido (carrega em uma página); legendas e texto alternativo nas fotos; campo Fontes preenchido nos textos novos; imagens em largura máxima de 1600 px; cabeçalhos de segurança e HTTPS no servidor; teste de impressão de um artigo longo; política de privacidade e página Direitos Autorais publicadas.
