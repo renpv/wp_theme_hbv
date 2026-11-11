@@ -236,6 +236,9 @@ function hbv_starter_add_items( $menu_id, $items, $parent = 0 ) {
  * @return string Mensagem de resultado.
  */
 function hbv_starter_run() {
+	if ( ! hbv_core_active() ) {
+		return __( 'Ative o plugin HBV Core antes: ele cria os tipos de conteúdo e os termos que o menu usa.', 'hbv' );
+	}
 	hbv_seed_terms();
 
 	foreach ( array_keys( hbv_starter_pages() ) as $slug ) {
