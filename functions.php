@@ -9,13 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HBV_VERSION', '1.0.0' );
+define( 'HBV_VERSION', '1.1.0' );
 define( 'HBV_DIR', get_template_directory() );
 define( 'HBV_URI', get_template_directory_uri() );
 
-require_once HBV_DIR . '/inc/post-types.php';
-require_once HBV_DIR . '/inc/taxonomies.php';
-require_once HBV_DIR . '/inc/meta.php';
+// Tipos, taxonomias e campos ficam no plugin HBV Core (ver inc/compat.php).
+require_once HBV_DIR . '/inc/compat.php';
 require_once HBV_DIR . '/inc/template-tags.php';
 require_once HBV_DIR . '/inc/patterns.php';
 require_once HBV_DIR . '/inc/starter.php';
@@ -303,7 +302,8 @@ function hbv_body_classes( $classes ) {
 add_filter( 'body_class', 'hbv_body_classes' );
 
 /**
- * Ao ativar o tema: registra, cria termos padrão e atualiza permalinks.
+ * Ao ativar o tema: cria os termos padrão (se o HBV Core estiver ativo) e
+ * atualiza os links permanentes.
  */
 function hbv_after_switch_theme() {
 	if ( function_exists( 'hbv_seed_terms' ) ) {

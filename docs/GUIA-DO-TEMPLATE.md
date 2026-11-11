@@ -1,16 +1,17 @@
 # Guia do template WordPress: História de Boa Viagem — Memória
 
-Tema clássico (PHP), sem dependências de plugins, com tipos de conteúdo próprios. Requer WordPress 6.4 ou superior e PHP 7.4 ou superior.
+Tema clássico (PHP). Desde a versão 1.1.0, os tipos de conteúdo, as taxonomias e os campos da ficha ficam no plugin **HBV Core** (repositório `renpv/hbv-core`), e o tema cuida só da apresentação. Requer WordPress 6.4 ou superior e PHP 7.4 ou superior.
 
-## 1. Instalação em cinco passos
+## 1. Instalação em seis passos
 
-1. Em Aparência > Temas > Adicionar > Enviar tema, envie `hbv-memoria.zip` e ative. Ao ativar, o tema cria os termos padrão (temas, períodos, tipos de lugar, papéis, tipos de obra e de instituição) e atualiza os links permanentes.
-2. Em Ferramentas > Estrutura inicial HBV, clique em "Criar estrutura inicial". Isso cria as páginas de seção e o menu principal de três níveis, igual ao mapa do site. Pode ser repetido sem duplicar nada.
-3. Em Configurações > Leitura, escolha "Uma página estática" para a página inicial (por exemplo a página Editorial) e uma página de postagens. O tema usa `front-page.php` nos dois casos.
-4. Em Aparência > Personalizar, defina o logotipo, o lema do site e a imagem do cabeçalho (1600 x 560 px, ideal: foto do Açude Vieirão). A imagem aparece no hero da home.
-5. Em Configurações > Links permanentes, escolha "Nome do post". Salve para regenerar as regras.
+1. Em Aparência > Temas > Adicionar > Enviar tema, envie `hbv-memoria.zip` e ative.
+2. Em Plugins, envie e ative o **HBV Core**. Ao ativar, ele registra os tipos de conteúdo, cria os termos padrão (temas, períodos, tipos de lugar, papéis, tipos de obra e de instituição) e atualiza os links permanentes. Sem o plugin, o tema funciona como tema de blog e mostra um aviso no painel.
+3. Em Ferramentas > Estrutura inicial HBV, clique em "Criar estrutura inicial". Isso cria as páginas de seção e o menu principal de três níveis, igual ao mapa do site. Pode ser repetido sem duplicar nada.
+4. Em Configurações > Leitura, escolha "Uma página estática" para a página inicial (por exemplo a página Editorial) e uma página de postagens. O tema usa `front-page.php` nos dois casos.
+5. Em Aparência > Personalizar, defina o logotipo, o lema do site e a imagem do cabeçalho (1600 x 560 px, ideal: foto do Açude Vieirão). A imagem aparece no hero da home.
+6. Em Configurações > Links permanentes, escolha "Nome do post". Salve para regenerar as regras.
 
-Com WP-CLI, o mesmo sem usar o painel: `wp theme install hbv-memoria.zip --activate`, `wp rewrite structure '/%postname%/' --hard` e `wp rewrite flush --hard`. A criação da estrutura inicial é feita pela tela de Ferramentas (uma ação de um clique).
+Com WP-CLI, o mesmo sem usar o painel: `wp theme install hbv-memoria.zip --activate`, `wp plugin install hbv-core.zip --activate`, `wp rewrite structure '/%postname%/' --hard` e `wp rewrite flush --hard`. A criação da estrutura inicial é feita pela tela de Ferramentas (uma ação de um clique).
 
 ## 2. Modelo de conteúdo
 
@@ -26,7 +27,7 @@ Com WP-CLI, o mesmo sem usar o painel: `wp theme install hbv-memoria.zip --activ
 
 Em todos os tipos, incluindo posts e páginas: taxonomia **Tema** (Cultura, Economia, Educação, Saúde, Turismo...) e **Período histórico** (os sete momentos, com ano inicial e final editáveis), além do campo **Fontes e bibliografia** (uma fonte por linha).
 
-Os campos estão registrados na API REST, então podem ser usados em importações e em integrações.
+Tipos, taxonomias e campos são registrados pelo plugin HBV Core (`includes/post-types.php`, `includes/taxonomies.php` e `includes/meta.php`). Os campos estão na API REST, então podem ser usados em importações e em integrações.
 
 ## 3. Templates
 
@@ -82,7 +83,7 @@ As entradas "Rede Pública" e "Rede Privada", que hoje apontam para a home, pass
 
 ## 7. Extensão e manutenção
 
-Cores, fontes e espaços: edite os tokens (`assets/css/tokens.css`) em um tema filho. Novo tipo de conteúdo: acrescente uma entrada em `hbv_post_type_defs()` (`inc/post-types.php`) e seus campos em `hbv_fields_for()` (`inc/meta.php`); `single-hbv.php` e `archive-hbv.php` passam a atendê-lo. Nova taxonomia: `hbv_taxonomy_defs()` em `inc/taxonomies.php`. Novo padrão de bloco: `inc/patterns.php`. Os tipos de conteúdo e campos pertencem ao tema. Ao trocar de tema, o conteúdo continua no banco de dados, mas os tipos deixam de aparecer no painel. Para evitar isso no longo prazo, mova `inc/post-types.php`, `inc/taxonomies.php` e `inc/meta.php` para um plugin de funcionalidades.
+Cores, fontes e espaços: edite os tokens (`assets/css/tokens.css`) em um tema filho. Novo tipo de conteúdo: no plugin HBV Core, acrescente uma entrada em `hbv_post_type_defs()` (`includes/post-types.php`) e seus campos em `hbv_fields_for()` (`includes/meta.php`); no tema, `single-hbv.php` e `archive-hbv.php` passam a atendê-lo. Nova taxonomia: `hbv_taxonomy_defs()` em `includes/taxonomies.php` do plugin. Novo padrão de bloco: `inc/patterns.php` do tema. Como o modelo fica no plugin, trocar de tema não esconde o conteúdo do painel. Sem o plugin, `inc/compat.php` define substitutos neutros para `hbv_post_type_defs()`, `hbv_cpts()`, `hbv_fields_for()` e `hbv_month_names()`.
 
 ## 8. Lista de verificação antes de publicar
 
