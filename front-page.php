@@ -24,23 +24,6 @@ $contact      = get_page_by_path( 'fale-conosco' );
 			<?php echo esc_html( get_bloginfo( 'description' ) ? get_bloginfo( 'description' ) : __( 'A história do Município de Boa Viagem em fatos e fotos.', 'hbv' ) ); ?>
 		</p>
 		<?php get_search_form(); ?>
-		<ul class="hbv-stats">
-			<?php
-			$stats = array(
-				'hbv_pessoa'     => array( 'biografia', 'biografias' ),
-				'hbv_lugar'      => array( 'lugar', 'lugares' ),
-				'hbv_logradouro' => array( 'logradouro', 'logradouros' ),
-				'hbv_fato'       => array( 'data e fato', 'datas e fatos' ),
-			);
-			foreach ( $stats as $type => $labels ) {
-				$n = hbv_count( $type );
-				if ( ! $n ) {
-					continue;
-				}
-				echo '<li><strong>' . esc_html( number_format_i18n( $n ) ) . '</strong>' . esc_html( 1 === $n ? $labels[0] : $labels[1] ) . '</li>';
-			}
-			?>
-		</ul>
 	</div>
 </section>
 
@@ -63,6 +46,70 @@ $contact      = get_page_by_path( 'fale-conosco' );
 			endwhile;
 		endif;
 		?>
+
+		<?php
+		/* O acervo em números: cada card leva ao índice correspondente. */
+		$timeline_page = get_page_by_path( 'linha-do-tempo' );
+		$numbers       = array(
+			array(
+				'icon' => 'person',
+				'n'    => hbv_count( 'hbv_pessoa' ),
+				'one'  => __( 'Biografia', 'hbv' ),
+				'many' => __( 'Biografias', 'hbv' ),
+				'url'  => get_post_type_archive_link( 'hbv_pessoa' ),
+			),
+			array(
+				'icon' => 'signpost',
+				'n'    => hbv_count( 'hbv_logradouro' ),
+				'one'  => __( 'Logradouro', 'hbv' ),
+				'many' => __( 'Logradouros', 'hbv' ),
+				'url'  => get_post_type_archive_link( 'hbv_logradouro' ),
+			),
+			array(
+				'icon' => 'pin',
+				'n'    => hbv_count( 'hbv_lugar' ),
+				'one'  => __( 'Lugar', 'hbv' ),
+				'many' => __( 'Lugares', 'hbv' ),
+				'url'  => get_post_type_archive_link( 'hbv_lugar' ),
+			),
+			array(
+				'icon' => 'calendar',
+				'n'    => hbv_count( 'hbv_fato' ),
+				'one'  => __( 'Data e fato', 'hbv' ),
+				'many' => __( 'Datas e fatos', 'hbv' ),
+				'url'  => get_post_type_archive_link( 'hbv_fato' ),
+			),
+			array(
+				'icon' => 'clock',
+				'n'    => count( hbv_get_periodos() ),
+				'one'  => __( 'Momento da história', 'hbv' ),
+				'many' => __( 'Momentos da história', 'hbv' ),
+				'url'  => $timeline_page ? get_permalink( $timeline_page ) : '',
+			),
+		);
+		$numbers = array_filter(
+			$numbers,
+			static function ( $card ) {
+				return $card['n'] > 0 && $card['url'];
+			}
+		);
+		if ( $numbers ) :
+			?>
+			<section class="hbv-section" aria-labelledby="numeros-title">
+				<div class="hbv-section__head"><h2 id="numeros-title"><?php esc_html_e( 'O acervo em números', 'hbv' ); ?></h2></div>
+				<ul class="hbv-statcards">
+					<?php foreach ( $numbers as $card ) : ?>
+						<li>
+							<article class="hbv-statcard">
+								<?php echo hbv_icon( $card['icon'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG de lista fixa, escapado em hbv_icon(). ?>
+								<p class="hbv-statcard__n"><?php echo esc_html( number_format_i18n( $card['n'] ) ); ?></p>
+								<p class="hbv-statcard__label"><a href="<?php echo esc_url( $card['url'] ); ?>"><?php echo esc_html( 1 === $card['n'] ? $card['one'] : $card['many'] ); ?></a></p>
+							</article>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			</section>
+		<?php endif; ?>
 
 		<?php
 		/* Seções do site (páginas com o modelo "Seção"). */

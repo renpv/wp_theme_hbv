@@ -26,6 +26,14 @@
 	.ds-space div { text-align: center; font-size: var(--hbv-fs-xs); color: var(--hbv-text-muted); }
 	.ds-space i { display: block; background: var(--hbv-accent); margin: 0 auto var(--hbv-space-1); }
 	.ds-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: var(--hbv-fs-xs); background: var(--hbv-surface-alt); padding: 0.1rem 0.4rem; border-radius: var(--hbv-radius-sm); }
+	.ds-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); gap: var(--hbv-space-3); list-style: none; margin: 0; padding: 0; }
+	.ds-icons li { display: grid; justify-items: center; gap: var(--hbv-space-1); padding: var(--hbv-space-3); background: var(--hbv-surface); border: 1px solid var(--hbv-border); border-radius: var(--hbv-radius-sm); font-size: var(--hbv-fs-xs); color: var(--hbv-text-muted); }
+	.ds-icons .hbv-icon { color: var(--hbv-accent); width: 1.75rem; height: 1.75rem; }
+	/* Moldura de celular: o transform faz a barra fixa e o painel ficarem presos a esta caixa. */
+	.ds-phone { position: relative; width: 390px; max-width: 100%; height: 520px; overflow: hidden; transform: translateZ(0); background: var(--hbv-bg); border: 1px solid var(--hbv-border); border-radius: var(--hbv-radius-md); }
+	.ds-phone .hbv-tabbar { display: block; }
+	.ds-phone .hbv-sheet:not([hidden]) { display: block; max-height: 22rem; }
+	.ds-phone p { margin: var(--hbv-space-4); font-size: var(--hbv-fs-sm); color: var(--hbv-text-muted); }
 	.ds-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: var(--hbv-space-5); }
 </style>
 </head>
@@ -33,7 +41,7 @@
 <div class="ds-wrap">
 
 	<header class="hbv-page-head hbv-page-head--wide">
-		<p class="hbv-eyebrow">Design system, versão 1.0</p>
+		<p class="hbv-eyebrow">Design system, versão 1.1</p>
 		<h1>História de Boa Viagem — Memória</h1>
 		<p class="hbv-page-head__desc">Tokens e componentes do tema WordPress do acervo histórico do Município. Esta página usa os mesmos arquivos de estilo do tema.</p>
 	</header>
@@ -245,15 +253,51 @@
 		</ol>
 	</section>
 
+	<section aria-labelledby="novos">
+		<h2 id="novos">Ícones, tema, números e barra inferior (versão 1.1)</h2>
+
+		<h3>Ícones próprios</h3>
+		<p>Traço de 1,75 px numa grade de 24 px, na cor do texto (<span class="ds-code">currentColor</span>), sempre decorativos (<span class="ds-code">aria-hidden</span>). Ficam em <span class="ds-code">inc/icons.php</span>; não há biblioteca externa.</p>
+		<ul class="ds-icons"><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20l4-1 11-11a2.1 2.1 0 0 0-3-3L5 16l-1 4z M14 7l3 3"/></svg><span>pen</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 21h18 M5 21V10 M9 21V10 M15 21V10 M19 21V10 M2 10l10-6 10 6z"/></svg><span>landmark</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 21V8l6-3v16 M10 21V11h10v10 M3 21h18 M13 14h2 M13 17h2 M6.5 10h1 M6.5 13h1 M6.5 16h1"/></svg><span>buildings</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 18V5l11-2v13 M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3z M20 16a3 3 0 1 1-3-3 3 3 0 0 1 3 3z"/></svg><span>music</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 9l10-5 10 5-10 5z M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5 M22 9v6"/></svg><span>graduation</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 21V4 M5 4h12l-2 4 2 4H5"/></svg><span>flag</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg><span>cross</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>compass</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>person</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v18 M6 5h10l3 3-3 3H6z M18 14H8l-3 3 3 3h10z"/></svg><span>signpost</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 7v5l3 2"/></svg><span>clock</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12z M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg><span>pin</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5h14v16H5z M5 10h14 M9 3v4 M15 3v4"/></svg><span>calendar</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 11l9-8 9 8 M5 10v10h14V10 M10 20v-6h4v6"/></svg><span>home</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14z M21 21l-4.3-4.3"/></svg><span>search</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16 M4 12h16 M4 17h16"/></svg><span>menu</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 3v18"/></svg><span>contrast</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M12 2v2 M12 20v2 M4.9 4.9l1.4 1.4 M17.7 17.7l1.4 1.4 M2 12h2 M20 12h2 M4.9 19.1l1.4-1.4 M17.7 6.3l1.4-1.4"/></svg><span>sun</span></li><li><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span>moon</span></li></ul>
+
+		<h3 style="margin-top:var(--hbv-space-6)">Cartão de seção com ícone</h3>
+		<ul class="hbv-grid hbv-grid--3"><li><article class="hbv-card hbv-card--secao"><div class="hbv-card__body"><span class="hbv-card__icon"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20l4-1 11-11a2.1 2.1 0 0 0-3-3L5 16l-1 4z M14 7l3 3"/></svg></span><h3 class="hbv-card__title"><a href="#novos">Editorial</a></h3><p class="hbv-card__excerpt">Apresentação, direitos autorais, fale conosco e quem somos.</p></div></article></li><li><article class="hbv-card hbv-card--secao"><div class="hbv-card__body"><span class="hbv-card__icon"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 21h18 M5 21V10 M9 21V10 M15 21V10 M19 21V10 M2 10l10-6 10 6z"/></svg></span><h3 class="hbv-card__title"><a href="#novos">A História do Município</a></h3><p class="hbv-card__excerpt">Economia, distritos, cartórios e símbolos municipais.</p></div></article></li><li><article class="hbv-card hbv-card--secao"><div class="hbv-card__body"><span class="hbv-card__icon"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 21V8l6-3v16 M10 21V11h10v10 M3 21h18 M13 14h2 M13 17h2 M6.5 10h1 M6.5 13h1 M6.5 16h1"/></svg></span><h3 class="hbv-card__title"><a href="#novos">A Cidade</a></h3><p class="hbv-card__excerpt">Acesso, bairros, avenidas, ruas, travessas e praças.</p></div></article></li></ul>
+
+		<h3 style="margin-top:var(--hbv-space-6)">Cards de números do acervo</h3>
+		<ul class="hbv-statcards"><li><article class="hbv-statcard"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><p class="hbv-statcard__n">550</p><p class="hbv-statcard__label"><a href="#novos">Biografias</a></p></article></li><li><article class="hbv-statcard"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v18 M6 5h10l3 3-3 3H6z M18 14H8l-3 3 3 3h10z"/></svg><p class="hbv-statcard__n">380</p><p class="hbv-statcard__label"><a href="#novos">Logradouros</a></p></article></li><li><article class="hbv-statcard"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 7v5l3 2"/></svg><p class="hbv-statcard__n">7</p><p class="hbv-statcard__label"><a href="#novos">Momentos da história</a></p></article></li><li><article class="hbv-statcard"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12z M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg><p class="hbv-statcard__n">[n]</p><p class="hbv-statcard__label"><a href="#novos">Lugares</a></p></article></li><li><article class="hbv-statcard"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5h14v16H5z M5 10h14 M9 3v4 M15 3v4"/></svg><p class="hbv-statcard__n">[n]</p><p class="hbv-statcard__label"><a href="#novos">Datas e fatos</a></p></article></li></ul>
+		<p style="font-size:var(--hbv-fs-xs);color:var(--hbv-text-muted)">No tema, os números vêm da contagem do WordPress. Aqui são valores de exemplo.</p>
+
+		<h3 style="margin-top:var(--hbv-space-6)">Alternar tema</h3>
+		<div class="ds-row">
+			<div class="hbv-theme" role="group" aria-label="Tema de cores" hidden><button type="button" data-hbv-theme="auto" aria-pressed="false" aria-label="Tema automático, segue o aparelho" title="Tema automático, segue o aparelho"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 3v18"/></svg></button><button type="button" data-hbv-theme="light" aria-pressed="false" aria-label="Tema claro" title="Tema claro"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M12 2v2 M12 20v2 M4.9 4.9l1.4 1.4 M17.7 17.7l1.4 1.4 M2 12h2 M20 12h2 M4.9 19.1l1.4-1.4 M17.7 6.3l1.4-1.4"/></svg></button><button type="button" data-hbv-theme="dark" aria-pressed="false" aria-label="Tema escuro" title="Tema escuro"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
+			<p style="margin:0;font-size:var(--hbv-fs-sm);color:var(--hbv-text-muted)">Automático segue o aparelho; claro e escuro forçam a escolha, guardada só no navegador do visitante.</p>
+		</div>
+
+		<h3 style="margin-top:var(--hbv-space-6)">Barra inferior e painel "Menu" (celular)</h3>
+		<p>Só aparece abaixo de 64 rem. Cinco destinos com alvo de pelo menos 44 px; o item da página atual tem <span class="ds-code">aria-current</span>. O botão "Menu" abre o painel com as seções, o seletor de tema e os links de rodapé.</p>
+		<div class="ds-phone">
+			<p>Conteúdo da página.</p>
+			<div class="hbv-sheet" id="ds-sheet" role="region" aria-label="Menu de seções">
+				<h2>Seções</h2>
+				<ul class="hbv-sheet__list"><li><a href="#novos"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20l4-1 11-11a2.1 2.1 0 0 0-3-3L5 16l-1 4z M14 7l3 3"/></svg>Editorial</a></li><li><a href="#novos"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 21h18 M5 21V10 M9 21V10 M15 21V10 M19 21V10 M2 10l10-6 10 6z"/></svg>A História do Município</a></li><li><a href="#novos"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 21V8l6-3v16 M10 21V11h10v10 M3 21h18 M13 14h2 M13 17h2 M6.5 10h1 M6.5 13h1 M6.5 16h1"/></svg>A Cidade</a></li></ul>
+				<div class="hbv-sheet__row"><span>Aparência</span><div class="hbv-theme" role="group" aria-label="Tema de cores" hidden><button type="button" data-hbv-theme="auto" aria-pressed="false" aria-label="Tema automático, segue o aparelho" title="Tema automático, segue o aparelho"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 3v18"/></svg></button><button type="button" data-hbv-theme="light" aria-pressed="false" aria-label="Tema claro" title="Tema claro"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M12 2v2 M12 20v2 M4.9 4.9l1.4 1.4 M17.7 17.7l1.4 1.4 M2 12h2 M20 12h2 M4.9 19.1l1.4-1.4 M17.7 6.3l1.4-1.4"/></svg></button><button type="button" data-hbv-theme="dark" aria-pressed="false" aria-label="Tema escuro" title="Tema escuro"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div></div>
+			</div>
+			<nav class="hbv-tabbar" aria-label="Navegação no celular">
+				<ul><li><a href="#novos" aria-current="page"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 11l9-8 9 8 M5 10v10h14V10 M10 20v-6h4v6"/></svg><span>Início</span></a></li><li><a href="#novos"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14z M21 21l-4.3-4.3"/></svg><span>Buscar</span></a></li><li><a href="#novos"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 7v5l3 2"/></svg><span>Linha do tempo</span></a></li><li><a href="#novos"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12z M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg><span>Mapa</span></a></li><li><button type="button" aria-expanded="true" aria-controls="ds-sheet"><svg class="hbv-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16 M4 12h16 M4 17h16"/></svg><span>Menu</span></button></li></ul>
+			</nav>
+		</div>
+	</section>
+
 	<section aria-labelledby="rodape">
 		<h2 id="rodape">Compartilhar e paginação</h2>
 		<ul class="hbv-share">
 			<li class="hbv-share__label">Compartilhar</li>
-			<li><a href="#rodape">WhatsApp</a></li><li><a href="#rodape">Facebook</a></li><li><a href="#rodape">E-mail</a></li><li><button type="button">Copiar link</button></li>
+			<li><a href="#rodape">WhatsApp</a></li><li><a href="#rodape">Facebook</a></li><li><a href="#rodape" aria-label="Compartilhar no X">X</a></li><li><a href="#rodape">E-mail</a></li><li><button type="button">Copiar link</button></li>
 		</ul>
 		<nav class="hbv-pagination"><div class="nav-links"><span class="page-numbers current">1</span><a class="page-numbers" href="#rodape">2</a><a class="page-numbers" href="#rodape">3</a><span class="page-numbers dots">…</span><a class="page-numbers" href="#rodape">Próximos →</a></div></nav>
 	</section>
 
 </div>
+<script src="../assets/js/main.js" defer></script>
 </body>
 </html>

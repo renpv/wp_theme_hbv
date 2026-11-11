@@ -41,6 +41,11 @@ if ( 'hbv_pessoa' === get_post_type() ) {
 	<div class="hbv-card__body">
 		<?php if ( 'secao' !== $variant ) : ?>
 			<p class="hbv-card__kicker"><?php echo esc_html( $kicker ); ?></p>
+		<?php else : ?>
+			<?php $section_icon = hbv_section_icon( get_post_field( 'post_name', get_the_ID() ) ); ?>
+			<?php if ( $section_icon ) : ?>
+				<span class="hbv-card__icon"><?php echo $section_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG de lista fixa, escapado em hbv_icon(). ?></span>
+			<?php endif; ?>
 		<?php endif; ?>
 		<h3 class="hbv-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 		<?php if ( 'pessoa' !== $variant ) : ?>

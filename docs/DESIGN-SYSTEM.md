@@ -1,12 +1,12 @@
 # Design system: História de Boa Viagem — Memória
 
-Versão 1.0. Fonte de verdade técnica: `assets/css/tokens.css` (variáveis) e `style.css` (componentes). Referência visual: `docs/design-system.html`.
+Versão 1.1. Fonte de verdade técnica: `assets/css/tokens.css` (variáveis) e `style.css` (componentes). Referência visual: `docs/design-system.html`.
 
 ## 1. Princípios
 
 **Documento primeiro.** O site é um acervo citável. O texto longo, a citação e a legenda são o centro do design, e tudo o mais fica quieto.
 
-**Território como identidade.** A paleta vem do Sertão Central: barro e couro (terra), papel de arquivo (areia), água do açude, verde de inverno da caatinga e sol (ocre). Sem gradientes decorativos nem ícones de estoque.
+**Território como identidade.** A paleta vem do Sertão Central: barro e couro (terra), papel de arquivo (areia), água do açude, verde de inverno da caatinga e sol (ocre). Sem gradientes decorativos nem ícones de estoque: os poucos ícones são desenhados para o tema, em traço simples e na cor do texto.
 
 **Fonte sempre à vista.** Toda informação histórica tem lugar para a referência: citação com autor e ano, ficha com campos e bloco de bibliografia.
 
@@ -38,7 +38,7 @@ Duas camadas: a paleta base tem nomes do território e os tokens semânticos diz
 
 Contrastes medidos (WCAG) no tema claro: texto couro-900 sobre areia-50, 15:1; links acude-700 sobre areia-50, 7,6:1; texto secundário pedra-600 sobre areia-50, 5,8:1, e sobre areia-200 (fichas), 4,7:1; texto branco sobre terra-600, 6,6:1; terra-600 como texto sobre areia-50, 6,2:1. O ocre-400 só é usado sobre fundos escuros (7,1:1 sobre couro-900). No tema escuro, texto 15,5:1, links 8,4:1, texto secundário 8,5:1 e destaque terracota claro 5,7:1 sobre a superfície. O contorno de foco em ocre-600 tem 3,4:1 sobre o papel (mínimo de 3:1 para componentes de interface).
 
-Tema escuro: os mesmos tokens semânticos são redefinidos em `tokens.css` e seguem o sistema do leitor. O atributo `data-theme="light"` ou `"dark"` na tag `html` força uma escolha.
+Tema escuro: os mesmos tokens semânticos são redefinidos em `tokens.css` e seguem o sistema do leitor. O atributo `data-theme="light"` ou `"dark"` na tag `html` força uma escolha. O seletor de tema (componente `.hbv-theme`) oferece três opções ao leitor: automático, claro e escuro. A escolha fica no `localStorage` do navegador, só neste site, e um script curto no `<head>` a aplica antes da primeira pintura para a página não piscar.
 
 ## 3. Tipografia
 
@@ -64,8 +64,13 @@ Contêiner de 72 rem com margem lateral fluida de 16 a 32 px. Duas colunas (cont
 | Componente | Classe | Uso | Observações |
 |---|---|---|---|
 | Cabeçalho | `.hbv-header` | Marca, lema e busca | Logotipo opcional pelo Personalizador |
-| Menu principal | `.hbv-navbar`, `.hbv-menu` | Oito seções, até quatro níveis | Abre por hover, foco e toque; Esc fecha |
-| Hero da home | `.hbv-hero` | Título, busca e números do acervo | Imagem do cabeçalho com véu escuro |
+| Menu principal | `.hbv-navbar`, `.hbv-menu` | Oito seções, até quatro níveis | Abre por hover, foco e toque; Esc fecha. No celular (abaixo de 64 rem) a barra some e as seções passam para o painel "Menu" da barra inferior |
+| Hero da home | `.hbv-hero` | Título e busca | Imagem do cabeçalho com véu escuro |
+| Ícone | `.hbv-icon`, `.hbv-card__icon` | Ícones SVG próprios (seções, números, barra inferior, tema) | Traço em `currentColor`, decorativos (`aria-hidden`); lista fixa em `inc/icons.php` |
+| Alternar tema | `.hbv-theme` | Automático, claro e escuro | Nasce oculto e o JavaScript o mostra; `aria-pressed` no botão ativo; guarda a escolha no navegador |
+| Cards de números | `.hbv-statcards`, `.hbv-statcard` | "O acervo em números" na home | Número, rótulo e ícone; o card inteiro é link para o índice; usa a contagem do WordPress |
+| Barra inferior | `.hbv-tabbar` | Início, Buscar, Linha do tempo, Mapa e Menu no celular | Só abaixo de 64 rem; alvos de 56 px; `aria-current` na página atual; "Linha do tempo" e "Mapa" só entram se a página existir |
+| Painel "Menu" | `.hbv-sheet` | Seções com ícone, seletor de tema e links de rodapé | Abre sobre a barra inferior; fecha com Esc, toque fora ou ao escolher um link |
 | Breadcrumbs | `.hbv-breadcrumbs` | Trilha em todas as páginas internas | Último item com `aria-current` |
 | Botão | `.hbv-btn`, `.hbv-btn--ghost` | Ação primária e secundária | Altura mínima de 44 px |
 | Campos | `input`, `select`, `textarea` | Busca, comentários | Borda pedra-500, foco ocre |
@@ -86,7 +91,7 @@ Contêiner de 72 rem com margem lateral fluida de 16 a 32 px. Duas colunas (cont
 | Abas de mês | `.hbv-tabs` | Datas e fatos | Atual com `aria-current` |
 | Data e fato | `.hbv-fato`, `.hbv-dia` | Evento com dia e mês | Selo escuro com dia grande |
 | Linha do tempo | `.hbv-timeline` | Sete períodos | Linha vertical e marcadores |
-| Compartilhar | `.hbv-share` | WhatsApp, Facebook, e-mail, copiar link | Links simples, sem scripts externos |
+| Compartilhar | `.hbv-share` | WhatsApp, Facebook, X, e-mail, copiar link | Links simples, sem scripts externos |
 | Paginação | `.hbv-pagination` | Listagens | Rótulos em português |
 | Comentários | `.hbv-comments` | Contribuições de leitores | Pede a fonte da informação |
 | Avisos | `.hbv-alert` | Informação, sucesso, erro | Cor e texto, nunca só cor |
@@ -104,7 +109,7 @@ Português claro e direto, sem tom institucional. Botões dizem o que fazem (Bus
 
 ## 9. Acessibilidade e desempenho
 
-Meta WCAG 2.1 AA. Estrutura de títulos: um h1 por página, h2 para seções, h3 para itens. Menus com `aria-expanded` e botões de submenu para teclado e toque. Busca com rótulo. Filtros com região `aria-live`. Imagens decorativas dos cartões têm `alt` vazio, com o título do link dando o nome. Sem rolagem horizontal em 320 px. Impressão com folha própria: oculta menu, barra lateral e compartilhamento, e mostra o endereço dos links externos.
+Meta WCAG 2.1 AA. Estrutura de títulos: um h1 por página, h2 para seções, h3 para itens. Menus com `aria-expanded` e botões de submenu para teclado e toque. Busca com rótulo. Filtros com região `aria-live`. Imagens decorativas dos cartões têm `alt` vazio, com o título do link dando o nome. Sem rolagem horizontal em 320 px. A barra inferior reserva espaço no fim da página (`body.hbv-has-tabbar`) e respeita a área segura dos aparelhos (`safe-area-inset-bottom`); o botão "voltar ao topo" sobe acima dela. Impressão com folha própria: oculta menu, barra lateral e compartilhamento, e mostra o endereço dos links externos.
 
 ## 10. Como estender
 

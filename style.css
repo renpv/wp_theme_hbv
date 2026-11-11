@@ -3,7 +3,7 @@ Theme Name: História de Boa Viagem — Memória
 Theme URI: https://www.historiadeboaviagem.com.br/
 Author: História de Boa Viagem
 Description: Tema clássico para o acervo histórico do Município de Boa Viagem (CE). Inclui design system (tokens, componentes), tipos de conteúdo próprios (biografias, lugares, logradouros, datas e fatos, obras, instituições), taxonomias de tema e período, padrões de bloco para citações e fontes, e templates de índice alfabético, calendário de fatos e linha do tempo.
-Version: 1.0.0
+Version: 1.1.0
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -349,16 +349,6 @@ input::placeholder, textarea::placeholder { color: var(--hbv-text-muted); opacit
 .hbv-hero__lead { margin: 0; font-size: var(--hbv-fs-lg); color: var(--hbv-areia-200); max-width: 38rem; }
 .hbv-hero .hbv-search { max-width: 32rem; }
 .hbv-hero .hbv-search input[type="search"] { border-color: transparent; }
-.hbv-stats { display: flex; flex-wrap: wrap; gap: var(--hbv-space-2) var(--hbv-space-6); margin: 0; padding: 0; list-style: none; }
-.hbv-stats li { font-size: var(--hbv-fs-sm); color: var(--hbv-areia-200); }
-.hbv-stats strong {
-	display: block;
-	font-family: var(--hbv-font-display);
-	font-size: var(--hbv-fs-2xl);
-	line-height: 1;
-	color: var(--hbv-areia-50);
-	font-variant-numeric: tabular-nums;
-}
 
 /* ---------- Layout principal ---------- */
 .hbv-main { padding-block: var(--hbv-space-6) var(--hbv-space-8); }
@@ -745,6 +735,51 @@ a.page-numbers:hover { background: var(--hbv-surface-alt); }
 }
 .hbv-totop[hidden] { display: none; }
 
+/* ---------- Ícones próprios (SVG em currentColor; valem nos dois temas) ---------- */
+.hbv-icon { display: inline-block; width: 1.5rem; height: 1.5rem; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.hbv-card__icon { display: inline-flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; margin-bottom: var(--hbv-space-2); border-radius: var(--hbv-radius-md); background: var(--hbv-surface-alt); color: var(--hbv-accent); }
+
+/* ---------- Alternar tema: automático, claro, escuro ---------- */
+.hbv-theme { display: inline-flex; margin: 0; padding: 2px; gap: 2px; border: var(--hbv-border-w) solid var(--hbv-border); border-radius: var(--hbv-radius-pill); background: var(--hbv-surface); }
+.hbv-theme[hidden] { display: none; }
+.hbv-theme button { display: inline-flex; align-items: center; justify-content: center; min-width: 2.75rem; min-height: 2.75rem; padding: 0; border: 0; border-radius: var(--hbv-radius-pill); background: transparent; color: var(--hbv-text); cursor: pointer; }
+.hbv-theme button:hover { background: var(--hbv-surface-alt); }
+.hbv-theme button[aria-pressed="true"] { background: var(--hbv-accent); color: var(--hbv-on-accent); }
+
+/* ---------- Cards de números do acervo (cada um leva ao índice) ---------- */
+.hbv-statcards { display: grid; gap: var(--hbv-space-4); grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); margin: 0; padding: 0; list-style: none; }
+.hbv-statcard { position: relative; display: grid; gap: var(--hbv-space-1); height: 100%; padding: var(--hbv-space-4) var(--hbv-space-5); background: var(--hbv-surface); border: var(--hbv-border-w) solid var(--hbv-border); border-radius: var(--hbv-radius-md); transition: box-shadow var(--hbv-dur-2) var(--hbv-ease); }
+.hbv-statcard:hover { box-shadow: var(--hbv-shadow-2); }
+.hbv-statcard .hbv-icon { color: var(--hbv-accent); margin-bottom: var(--hbv-space-2); }
+.hbv-statcard__n { margin: 0; font-family: var(--hbv-font-display); font-size: var(--hbv-fs-3xl); line-height: 1; font-variant-numeric: tabular-nums; }
+.hbv-statcard__label { margin: 0; font-size: var(--hbv-fs-sm); }
+.hbv-statcard__label a { color: var(--hbv-text); font-weight: 600; text-decoration: none; }
+.hbv-statcard__label a::after { content: ""; position: absolute; inset: 0; }
+.hbv-statcard__label a:hover { color: var(--hbv-accent); }
+
+/* ---------- Barra inferior do celular e painel "Menu" (só abaixo de 64rem) ---------- */
+.hbv-tabbar, .hbv-sheet { display: none; }
+.hbv-tabbar { position: fixed; inset-inline: 0; bottom: 0; z-index: 60; background: var(--hbv-chrome-bg); color: var(--hbv-chrome-text); border-top: 3px solid var(--hbv-chrome-accent); padding-bottom: env(safe-area-inset-bottom, 0); }
+.hbv-tabbar ul { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); margin: 0; padding: 0; list-style: none; }
+.hbv-tabbar a, .hbv-tabbar button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; width: 100%; min-height: 3.5rem; padding: var(--hbv-space-1); border: 0; background: transparent; color: inherit; font: 600 var(--hbv-fs-xs)/1.1 var(--hbv-font-body); text-align: center; text-decoration: none; cursor: pointer; }
+.hbv-tabbar [aria-current="page"], .hbv-tabbar [aria-expanded="true"] { color: var(--hbv-chrome-accent); }
+.hbv-sheet { position: fixed; inset-inline: 0; bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px)); z-index: 59; max-height: calc(100vh - 8rem); overflow: auto; padding: var(--hbv-space-5) var(--hbv-gutter); background: var(--hbv-surface); color: var(--hbv-text); border-top: var(--hbv-border-w) solid var(--hbv-border); border-radius: var(--hbv-radius-md) var(--hbv-radius-md) 0 0; box-shadow: var(--hbv-shadow-2); }
+.hbv-sheet h2 { margin: 0 0 var(--hbv-space-3); font: 700 var(--hbv-fs-xs)/1.2 var(--hbv-font-body); letter-spacing: var(--hbv-tracking-label); text-transform: uppercase; color: var(--hbv-text-muted); }
+.hbv-sheet__list { display: grid; gap: var(--hbv-space-1); margin: 0; padding: 0; list-style: none; }
+.hbv-sheet__list a { display: flex; align-items: center; gap: var(--hbv-space-3); min-height: 2.75rem; padding: var(--hbv-space-2); border-radius: var(--hbv-radius-sm); color: inherit; font-weight: 600; text-decoration: none; }
+.hbv-sheet__list a:hover { background: var(--hbv-surface-alt); }
+.hbv-sheet__list .hbv-icon { color: var(--hbv-accent); }
+.hbv-sheet__list--extra { margin-top: var(--hbv-space-4); }
+.hbv-sheet__row { display: flex; align-items: center; justify-content: space-between; gap: var(--hbv-space-4); margin-top: var(--hbv-space-5); padding-top: var(--hbv-space-4); border-top: var(--hbv-border-w) solid var(--hbv-border); font-size: var(--hbv-fs-sm); font-weight: 600; }
+@media (max-width: 63.999rem) {
+	.hbv-tabbar { display: block; }
+	.hbv-sheet:not([hidden]) { display: block; }
+	.hbv-navbar { display: none; }
+	.hbv-header .hbv-theme { display: none; }
+	body.hbv-has-tabbar { padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px)); }
+	.hbv-totop { bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px) + var(--hbv-space-4)); }
+}
+
 /* ---------- Comentários ---------- */
 .hbv-comments { max-width: var(--hbv-prose); margin-top: var(--hbv-space-7); padding-top: var(--hbv-space-5); border-top: var(--hbv-border-w) solid var(--hbv-border); }
 .hbv-comments ol { list-style: none; padding: 0; margin: 0 0 var(--hbv-space-6); }
@@ -771,7 +806,7 @@ a.page-numbers:hover { background: var(--hbv-surface-alt); }
 /* ---------- Impressão ---------- */
 @media print {
 	body { background: #fff; color: #000; font-size: 11pt; }
-	.hbv-navbar, .hbv-header .hbv-search, .hbv-footer, .hbv-sidebar, .hbv-share, .hbv-totop,
+	.hbv-navbar, .hbv-header .hbv-search, .hbv-footer, .hbv-sidebar, .hbv-share, .hbv-totop, .hbv-tabbar, .hbv-sheet, .hbv-theme,
 	.hbv-postnav, .hbv-comments, .hbv-breadcrumbs, .hbv-skip { display: none !important; }
 	.hbv-layout--sidebar { display: block; }
 	.hbv-prose { max-width: none; }
