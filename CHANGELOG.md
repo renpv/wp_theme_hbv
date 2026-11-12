@@ -3,6 +3,13 @@
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). Versões em
 [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.2.1] - 2026-11-12
+
+### Corrigido
+- A ficha não repete dia, mês e ano separados (`*_dia`, `*_mes`, `*_ano`): esses campos servem às
+  consultas, e a ficha mostra o campo de texto. Datas "DD/MM/AAAA" aparecem por extenso
+  ("3 de dezembro de 1890").
+
 ## [1.2.0] - 2026-11-12
 
 ### Adicionado

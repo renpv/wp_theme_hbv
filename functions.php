@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HBV_VERSION', '1.2.0' );
+define( 'HBV_VERSION', '1.2.1' );
 define( 'HBV_DIR', get_template_directory() );
 define( 'HBV_URI', get_template_directory_uri() );
 
