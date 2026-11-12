@@ -3,6 +3,24 @@
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). Versões em
 [SemVer](https://semver.org/lang/pt-BR/).
 
+## [1.2.0] - 2026-11-12
+
+### Adicionado
+- Arquivo de um mês (`/datas-e-fatos/?hbv_mes=N`): abertura no padrão "As informações básicas"
+  (option `hbv_meses`), seções "Nasceram em <mês>" e "Morreram em <mês>" (biografias agrupadas por
+  dia) e bibliografia do mês. Requer o plugin HBV Core 0.4.0 ou superior.
+- Home: "Nasceram neste dia", com até seis biografias e o link "Ver o mês completo".
+- Componentes `.hbv-dia--mes`, `.hbv-mes-abertura`, `.hbv-aniversarios` e `.hbv-aniv*`
+  (style.css, docs/design-system.html e docs/DESIGN-SYSTEM.md).
+- `template-parts/aniversarios.php`, `hbv_get_mes_info()` e `hbv_get_pessoas_por_data()`.
+
+### Corrigido
+- O calendário de fatos escondia os fatos sem `hbv_dia` (por exemplo as campanhas de cada mês).
+  Agora eles aparecem no início do mês, com o selo "mês" e o texto "Ao longo de <mês>".
+
+### Mudado
+- Na visão de um mês, o título da lista de fatos passa a "Datas e fatos de <mês>".
+
 ## [1.1.0] - 2026-11-11
 
 ### Mudado

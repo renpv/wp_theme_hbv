@@ -85,6 +85,10 @@ Contêiner de 72 rem com margem lateral fluida de 16 a 32 px. Duas colunas (cont
 | Lista numerada | `.hbv-numlist` | Avenidas, ruas, travessas | Em colunas, com filtro |
 | Abas de mês | `.hbv-tabs` | Datas e fatos | Atual com `aria-current` |
 | Data e fato | `.hbv-fato`, `.hbv-dia` | Evento com dia e mês | Selo escuro com dia grande |
+| Data sem dia | `.hbv-dia--mes` | Fato que vale para o mês inteiro | Selo com "mês" no lugar do dia. O selo é `aria-hidden`; a linha de meta diz "Ao longo de janeiro" |
+| Abertura do mês | `.hbv-mes-abertura` + `.hbv-basicas` | Origem do nome do mês, no topo do arquivo do mês | Reaproveita o padrão "As informações básicas"; HTML passa por `wp_kses_post` |
+| Aniversários do mês | `.hbv-aniversarios`, `.hbv-aniv`, `.hbv-aniv__grupo`, `.hbv-aniv__dia`, `.hbv-aniv__nomes`, `.hbv-aniv__ano` | "Nasceram em" e "Morreram em" agrupados por dia | Lista de definição (dia = termo, nomes = descrição); uma coluna em telas pequenas e duas a partir de 40 rem; alvos de 44 px; seção vazia não aparece |
+| Nasceram neste dia | `.hbv-aniv__nomes--grid`, `.hbv-aniv__data` | Até seis biografias na home | Mesma lista dos aniversários, em grade |
 | Linha do tempo | `.hbv-timeline` | Sete períodos | Linha vertical e marcadores |
 | Compartilhar | `.hbv-share` | WhatsApp, Facebook, e-mail, copiar link | Links simples, sem scripts externos |
 | Paginação | `.hbv-pagination` | Listagens | Rótulos em português |

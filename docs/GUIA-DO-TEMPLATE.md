@@ -33,7 +33,7 @@ Tipos, taxonomias e campos são registrados pelo plugin HBV Core (`includes/post
 
 | Arquivo | Função |
 |---|---|
-| `front-page.php` | Home: hero com busca e números, seções, sete momentos, fatos do mês, biografias sorteadas, recentes e convite à colaboração |
+| `front-page.php` | Home: hero com busca e números, seções, sete momentos, fatos do mês, quem nasceu neste dia, biografias sorteadas, recentes e convite à colaboração |
 | `page-templates/page-secao.php` | Portal de seção: texto, subpáginas em cartões e conteúdos do mesmo tema |
 | `page-templates/page-linha-do-tempo.php` | Os sete períodos com os conteúdos mais recentes de cada um |
 | `single.php` | Artigo longo, com selos, ficha, fontes, compartilhar, anterior e próximo, comentários |
@@ -41,11 +41,25 @@ Tipos, taxonomias e campos são registrados pelo plugin HBV Core (`includes/post
 | `page.php` | Páginas comuns |
 | `archive-hbv_pessoa.php` | Índice A–Z com filtro por nome e ocupação |
 | `archive-hbv_logradouro.php` | Listas numeradas por tipo (avenidas, ruas, travessas) com filtro |
-| `archive-hbv_fato.php` | Calendário com abas de mês (`?hbv_mes=1` a `12`) |
+| `archive-hbv_fato.php` | Calendário com abas de mês (`?hbv_mes=1` a `12`); na visão de um mês mostra a abertura, os fatos, quem nasceu e morreu no mês e a bibliografia |
 | `archive-hbv.php` | Lugares, obras e instituições, com atalhos por tipo |
 | `archive.php` | Arquivos de tema, período, papel e demais taxonomias |
 | `search.php`, `404.php`, `index.php` | Busca em todo o acervo, página não encontrada e publicações |
-| `template-parts/card.php`, `fato.php` | Cartão (padrão, pessoa, seção) e item de data e fato |
+| `template-parts/card.php`, `fato.php`, `aniversarios.php` | Cartão (padrão, pessoa, seção), item de data e fato e lista de aniversários por dia |
+
+### Arquivo de um mês e aniversários (tema 1.2.0, plugin HBV Core 0.4.0 ou superior)
+
+O endereço `/datas-e-fatos/?hbv_mes=N` (N de 1 a 12; o antigo `/janeiro/` redireciona para ele) mostra, nesta ordem: abertura do mês, datas e fatos, "Nasceram em <mês>", "Morreram em <mês>" e bibliografia. Na visão "Ano todo" só aparecem os fatos.
+
+**Fatos sem dia.** A consulta inclui os fatos que têm só o mês (por exemplo "Campanhas governamentais de janeiro"): a meta `hbv_dia` pode não existir. Eles vêm primeiro no mês, com o selo "mês" e a linha "Ao longo de janeiro".
+
+**Option `hbv_meses`.** Gravada pelo plugin. Array indexado de 1 a 12; cada item tem `abertura_html` (HTML do texto de abertura, filtrado com `wp_kses_post`) e `bibliografia` (lista de textos, uma referência por item, escapados na saída). O tema lê tudo com `hbv_get_mes_info( $mes )` (`inc/template-tags.php`), que devolve as duas chaves vazias se faltar algo. Outras chaves do item são ignoradas.
+
+**Metas de biografia.** Numéricas: `hbv_nascimento_dia`, `hbv_nascimento_mes`, `hbv_nascimento_ano`, `hbv_falecimento_dia`, `hbv_falecimento_mes`, `hbv_falecimento_ano`. O ano é opcional (só aparece entre parênteses quando existe) e quem tem mês sem dia vai para o grupo "Dia não informado", no fim. `hbv_get_pessoas_por_data( $tipo, $mes, $dia, $limite )` faz a consulta (até 400 biografias, sem contagem total e sem cache de termos) e ordena em PHP por dia e nome.
+
+**Sem o plugin.** Se `hbv_core_active()` for falso, as funções devolvem listas vazias e nenhuma seção nova é impressa; nada gera erro.
+
+**Home.** "Nasceram neste dia" mostra até seis biografias cujo `hbv_nascimento_dia` e `hbv_nascimento_mes` são os de hoje no fuso do site (`wp_date`), com o link "Ver o mês completo". Sem resultados, a seção não aparece.
 
 ## 4. Editor de blocos
 

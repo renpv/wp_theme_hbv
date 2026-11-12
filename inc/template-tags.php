@@ -321,3 +321,125 @@ function hbv_nav_fallback() {
 	}
 	echo '</ul>';
 }
+
+/**
+ * Texto de abertura e bibliografia de um mês (option `hbv_meses`, gravada pelo plugin HBV Core).
+ *
+ * A option é um array indexado de 1 a 12:
+ * `array( 'abertura_html' => '<p>…</p>', 'bibliografia' => array( 'FRANCO, 2007…', … ) )`.
+ * Aceita também JSON em texto. Devolve sempre as duas chaves, vazias se não houver dados.
+ *
+ * @param int $mes Mês, de 1 a 12.
+ * @return array{abertura_html:string,bibliografia:string[]}
+ */
+function hbv_get_mes_info( $mes ) {
+	$info = array(
+		'abertura_html' => '',
+		'bibliografia'  => array(),
+	);
+	$mes  = absint( $mes );
+	if ( $mes < 1 || $mes > 12 ) {
+		return $info;
+	}
+
+	$all = get_option( 'hbv_meses', array() );
+	if ( is_string( $all ) ) {
+		$all = json_decode( $all, true );
+	}
+	if ( ! is_array( $all ) || ! isset( $all[ $mes ] ) || ! is_array( $all[ $mes ] ) ) {
+		return $info;
+	}
+
+	if ( isset( $all[ $mes ]['abertura_html'] ) && is_string( $all[ $mes ]['abertura_html'] ) ) {
+		$info['abertura_html'] = trim( $all[ $mes ]['abertura_html'] );
+	}
+	if ( isset( $all[ $mes ]['bibliografia'] ) && is_array( $all[ $mes ]['bibliografia'] ) ) {
+		foreach ( $all[ $mes ]['bibliografia'] as $ref ) {
+			if ( is_string( $ref ) && '' !== trim( $ref ) ) {
+				$info['bibliografia'][] = trim( $ref );
+			}
+		}
+	}
+	return $info;
+}
+
+/**
+ * Biografias que nasceram ou morreram em um mês (ou em um dia).
+ *
+ * Usa as metas numéricas `hbv_nascimento_*` e `hbv_falecimento_*` (plugin HBV Core 0.4.0 ou
+ * superior). Consulta limitada, sem contagem total e sem cache de termos; a ordem é feita em
+ * PHP: dia crescente (quem não tem dia no fim) e nome em ordem alfabética, sem acento.
+ *
+ * @param string $tipo  'nascimento' ou 'falecimento'.
+ * @param int    $mes   Mês, de 1 a 12.
+ * @param int    $dia   Dia, de 1 a 31; 0 para o mês inteiro.
+ * @param int    $limit Máximo de biografias.
+ * @return array<int,array{id:int,title:string,url:string,dia:int,ano:int}>
+ */
+function hbv_get_pessoas_por_data( $tipo, $mes, $dia = 0, $limit = 400 ) {
+	$mes   = absint( $mes );
+	$dia   = absint( $dia );
+	$limit = max( 1, min( 400, absint( $limit ) ) );
+	if ( ! in_array( $tipo, array( 'nascimento', 'falecimento' ), true ) || $mes < 1 || $mes > 12 || $dia > 31 || ! function_exists( 'hbv_core_active' ) || ! hbv_core_active() ) {
+		return array();
+	}
+
+	$meta = array(
+		'relation' => 'AND',
+		array(
+			'key'     => 'hbv_' . $tipo . '_mes',
+			'value'   => $mes,
+			'type'    => 'NUMERIC',
+			'compare' => '=',
+		),
+	);
+	if ( $dia ) {
+		$meta[] = array(
+			'key'     => 'hbv_' . $tipo . '_dia',
+			'value'   => $dia,
+			'type'    => 'NUMERIC',
+			'compare' => '=',
+		);
+	}
+
+	$q = new WP_Query(
+		array(
+			'post_type'              => 'hbv_pessoa',
+			'post_status'            => 'publish',
+			'posts_per_page'         => $limit,
+			'orderby'                => 'title',
+			'order'                  => 'ASC',
+			'no_found_rows'          => true,
+			'ignore_sticky_posts'    => true,
+			'update_post_term_cache' => false,
+			'update_post_meta_cache' => true,
+			'meta_query'             => $meta, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- limitada por posts_per_page.
+		)
+	);
+
+	$items = array();
+	foreach ( $q->posts as $p ) {
+		$items[] = array(
+			'id'    => (int) $p->ID,
+			'title' => get_the_title( $p ),
+			'url'   => get_permalink( $p ),
+			'dia'   => (int) get_post_meta( $p->ID, 'hbv_' . $tipo . '_dia', true ),
+			'ano'   => (int) get_post_meta( $p->ID, 'hbv_' . $tipo . '_ano', true ),
+			'key'   => strtolower( remove_accents( wp_strip_all_tags( get_the_title( $p ) ) ) ),
+		);
+	}
+
+	usort(
+		$items,
+		static function ( $a, $b ) {
+			$da = $a['dia'] ? $a['dia'] : 99; // Sem dia vai para o fim.
+			$db = $b['dia'] ? $b['dia'] : 99;
+			if ( $da !== $db ) {
+				return $da - $db;
+			}
+			return strcmp( $a['key'], $b['key'] );
+		}
+	);
+
+	return $items;
+}

@@ -170,6 +170,37 @@ $contact      = get_page_by_path( 'fale-conosco' );
 		<?php endif; ?>
 
 		<?php
+		/* Nasceram neste dia: até 6 biografias (dia e mês de hoje, no fuso do site). */
+		$hoje_dia = (int) wp_date( 'j' );
+		$meses    = hbv_month_names();
+		$nasceram = hbv_core_active() ? hbv_get_pessoas_por_data( 'nascimento', $mes_atual, $hoje_dia, 6 ) : array();
+		if ( $nasceram ) :
+			?>
+			<section class="hbv-section" aria-labelledby="nasceram-title">
+				<div class="hbv-section__head">
+					<h2 id="nasceram-title"><?php esc_html_e( 'Nasceram neste dia', 'hbv' ); ?></h2>
+					<a class="hbv-section__more" href="<?php echo esc_url( add_query_arg( 'hbv_mes', $mes_atual, get_post_type_archive_link( 'hbv_fato' ) ) ); ?>"><?php esc_html_e( 'Ver o mês completo', 'hbv' ); ?> &rarr;</a>
+				</div>
+				<p class="hbv-aniv__data">
+					<?php
+					/* translators: 1: dia do mês, 2: nome do mês */
+					echo esc_html( sprintf( __( '%1$d de %2$s', 'hbv' ), $hoje_dia, mb_strtolower( $meses[ $mes_atual ] ) ) );
+					?>
+				</p>
+				<ul class="hbv-aniv__nomes hbv-aniv__nomes--grid">
+					<?php foreach ( $nasceram as $p ) : ?>
+						<li>
+							<a href="<?php echo esc_url( $p['url'] ); ?>"><?php echo esc_html( $p['title'] ); ?></a>
+							<?php if ( $p['ano'] ) : ?>
+								<span class="hbv-aniv__ano">(<?php echo esc_html( $p['ano'] ); ?>)</span>
+							<?php endif; ?>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			</section>
+		<?php endif; ?>
+
+		<?php
 		/* Biografias em destaque (sorteio a cada visita). */
 		$bios = new WP_Query(
 			array(
