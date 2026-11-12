@@ -52,6 +52,26 @@ function hbv_format_field( $value, $field ) {
 }
 
 /**
+ * Converte "DD/MM/AAAA" em data por extenso ("3 de dezembro de 1890").
+ * Outros textos ("c. 1850", "1890", "século XIX") voltam como estão.
+ *
+ * @param mixed $value Valor do campo.
+ * @return mixed
+ */
+function hbv_data_por_extenso( $value ) {
+	if ( ! is_string( $value ) || ! preg_match( '#^(\d{1,2})/(\d{1,2})/(\d{3,4})$#', trim( $value ), $m ) ) {
+		return $value;
+	}
+	$meses = hbv_month_names();
+	$mes   = (int) $m[2];
+	if ( ! isset( $meses[ $mes ] ) ) {
+		return $value;
+	}
+	$dia = (int) $m[1];
+	return ( 1 === $dia ? '1º' : (string) $dia ) . ' de ' . mb_strtolower( $meses[ $mes ] ) . ' de ' . $m[3];
+}
+
+/**
  * Ficha técnica: lista de campos preenchidos.
  *
  * @param int $post_id ID do conteúdo.
@@ -60,15 +80,22 @@ function hbv_ficha( $post_id = 0 ) {
 	$post_id = $post_id ? $post_id : get_the_ID();
 	$rows    = array();
 
-	foreach ( hbv_fields_for( get_post_type( $post_id ) ) as $key => $field ) {
+	$fields = hbv_fields_for( get_post_type( $post_id ) );
+
+	foreach ( $fields as $key => $field ) {
 		if ( 'fontes' === $key ) {
+			continue;
+		}
+		// Dia, mês e ano separados (ex.: nascimento_dia) servem às consultas
+		// ("Nasceram em…", "Hoje na história"); a ficha mostra o campo de texto.
+		if ( preg_match( '/^(.+)_(dia|mes|ano)$/', $key, $m ) && isset( $fields[ $m[1] ] ) ) {
 			continue;
 		}
 		$value = get_post_meta( $post_id, 'hbv_' . $key, true );
 		if ( '' === $value || false === $value || 0 === $value || '0' === $value ) {
 			continue;
 		}
-		$html = hbv_format_field( $value, $field );
+		$html = hbv_format_field( hbv_data_por_extenso( $value ), $field );
 		if ( '' === $html ) {
 			continue;
 		}
