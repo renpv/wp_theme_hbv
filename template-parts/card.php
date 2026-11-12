@@ -29,6 +29,9 @@ if ( 'hbv_pessoa' === get_post_type() ) {
 	$mn  = hbv_month_names();
 	if ( $dia && $mes && isset( $mn[ $mes ] ) ) {
 		$meta = $dia . ' de ' . strtolower( $mn[ $mes ] ) . ( $ano ? ' de ' . $ano : '' );
+	} elseif ( ! $dia && $mes && isset( $mn[ $mes ] ) ) {
+		/* translators: %s: nome do mês, em minúsculas */
+		$meta = sprintf( __( 'Ao longo de %s', 'hbv' ), strtolower( $mn[ $mes ] ) ) . ( $ano ? ' de ' . $ano : '' );
 	}
 }
 ?>

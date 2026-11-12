@@ -3,7 +3,7 @@ Theme Name: História de Boa Viagem — Memória
 Theme URI: https://www.historiadeboaviagem.com.br/
 Author: História de Boa Viagem
 Description: Tema clássico para o acervo histórico do Município de Boa Viagem (CE). Inclui design system (tokens, componentes), templates para os tipos de conteúdo do plugin HBV Core (biografias, lugares, logradouros, datas e fatos, obras, instituições), taxonomias de tema e período, padrões de bloco para citações e fontes, e templates de índice alfabético, calendário de fatos e linha do tempo.
-Version: 1.1.0
+Version: 1.2.0
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
@@ -592,6 +592,45 @@ a.hbv-badge:hover { background: var(--hbv-accent); color: var(--hbv-on-accent); 
 .hbv-fato__title a { color: var(--hbv-text); text-decoration: none; }
 .hbv-fato__title a:hover { color: var(--hbv-accent); text-decoration: underline; }
 .hbv-fato__meta { margin: 0; font-size: var(--hbv-fs-sm); color: var(--hbv-text-muted); }
+
+/* Selo de fato que vale para o mês inteiro (sem dia): "mês" no lugar do número. */
+.hbv-dia--mes .hbv-dia__n { font-size: var(--hbv-fs-lg); }
+
+/* ---------- Arquivo de um mês: abertura e aniversários ---------- */
+.hbv-mes-abertura { margin-bottom: var(--hbv-space-6); }
+
+.hbv-aniv { margin: 0; }
+.hbv-aniv__grupo {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 0 var(--hbv-space-4);
+	padding-block: var(--hbv-space-2);
+	border-top: var(--hbv-border-w) solid var(--hbv-border);
+}
+.hbv-aniv__dia {
+	padding-top: var(--hbv-space-2);
+	font-family: var(--hbv-font-display);
+	font-size: var(--hbv-fs-lg);
+	font-weight: 700;
+	color: var(--hbv-accent);
+	font-variant-numeric: tabular-nums;
+}
+.hbv-aniv__itens { margin: 0; min-width: 0; }
+.hbv-aniv__nomes { list-style: none; margin: 0; padding: 0; }
+.hbv-aniv__nomes li {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	column-gap: var(--hbv-space-2);
+	overflow-wrap: break-word;
+}
+.hbv-aniv__nomes a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+.hbv-aniv__ano { font-size: var(--hbv-fs-sm); color: var(--hbv-text-muted); font-variant-numeric: tabular-nums; }
+.hbv-aniv__data { margin: 0 0 var(--hbv-space-3); font-size: var(--hbv-fs-sm); color: var(--hbv-text-muted); }
+.hbv-aniv__nomes--grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr)); column-gap: var(--hbv-space-5); }
+@media (min-width: 40rem) {
+	.hbv-aniv__grupo { grid-template-columns: 9rem minmax(0, 1fr); }
+}
 
 /* ---------- Abas (meses) e índice A–Z ---------- */
 .hbv-tabs, .hbv-az { display: flex; flex-wrap: wrap; gap: var(--hbv-space-2); list-style: none; margin: 0 0 var(--hbv-space-5); padding: 0; }

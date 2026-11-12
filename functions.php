@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'HBV_VERSION', '1.1.0' );
+define( 'HBV_VERSION', '1.2.0' );
 define( 'HBV_DIR', get_template_directory() );
 define( 'HBV_URI', get_template_directory_uri() );
 
@@ -203,10 +203,19 @@ function hbv_pre_get_posts( $q ) {
 				'type'    => 'NUMERIC',
 				'compare' => 'EXISTS',
 			),
-			'hbv_dia_clause'  => array(
-				'key'     => 'hbv_dia',
-				'type'    => 'NUMERIC',
-				'compare' => 'EXISTS',
+			// Fatos sem dia (só mês) também entram: EXISTS OR NOT EXISTS. Sem dia, o valor
+			// é NULL e vem primeiro no mês (ordem crescente).
+			'hbv_dia_group'   => array(
+				'relation'           => 'OR',
+				'hbv_dia_clause'     => array(
+					'key'     => 'hbv_dia',
+					'type'    => 'NUMERIC',
+					'compare' => 'EXISTS',
+				),
+				'hbv_sem_dia_clause' => array(
+					'key'     => 'hbv_dia',
+					'compare' => 'NOT EXISTS',
+				),
 			),
 		);
 		if ( $mes >= 1 && $mes <= 12 ) {
